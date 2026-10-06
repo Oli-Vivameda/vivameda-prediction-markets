@@ -1,0 +1,28 @@
+{
+  "schema": "prediction-scanner-deployment-v1",
+  "date": "2026-10-06",
+  "installed": true,
+  "bundle_sha256": "ee6d95b287ce3d871354ed7169f25f364922be16c86a272de17e9c43024fc26b",
+  "tests_passed": 58,
+  "timer_active": true,
+  "cadence": "hourly",
+  "service_result": "success",
+  "runtime_files_match": true,
+  "next_run_utc": "2026-10-06T08:00:10Z",
+  "telegram_startup_confirmed": true,
+  "initial_cycle": {
+    "polymarket_records": 500,
+    "kalshi_records": 5000,
+    "candidates": 31,
+    "telegram_candidate_groups_sent": 2,
+    "telegram_failures": 0
+  },
+  "live_execution": false,
+  "paid_provider_requests": 0,
+  "validation_sources": {
+    "deployment_and_notification_counts": "owner-provided root installer receipt",
+    "timer_service_and_source_hashes": "independent read-only server verification",
+    "runtime_state": "private to service account; engineering user cannot read it"
+  },
+  "scope": "Evidence-supported research candidates; no validated probability or profitable edge"
+}

@@ -1,6 +1,8 @@
 # Vivameda prediction-market scanner v1
 
-Status: source built and tested on Hetzner; recurring service installation pending.
+Status: deployed on Hetzner on 6 October 2026. Hourly timer active; initial service run succeeded.
+Startup delivery confirmed. Initial cycle read 5,500 records, found 31 research candidates and sent two
+candidate-group notifications with no failures. See DEPLOYMENT_20261006.json for verification provenance.
 Live execution, signing, wallets, paid enrichment and alert-policy changes are absent.
 
 ## Behavior
