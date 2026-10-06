@@ -1,9 +1,9 @@
 [Unit]
-Description=Scan prediction markets every fifteen minutes
+Description=Scan prediction markets hourly and notify the owner
 
 [Timer]
-OnBootSec=2min
-OnUnitInactiveSec=15min
+OnCalendar=hourly
+Persistent=true
 RandomizedDelaySec=30
 Unit=vivameda-prediction-scanner.service
 

@@ -21,13 +21,24 @@ explicit reviewed fees/slippage and positive conservative expected payout minus 
 assumptions, not real executions. Reviewed final settlement computes forecast diagnostics and simulated P&L.
 No autonomous forecast or paper position has been created.
 
+## Hourly Telegram notifications
+The server scans at each hour with a small randomized delay and resumes after reboot.
+The owner receives grouped research candidates only when the contract is open, the snapshot is fresh,
+a price reference is present and retained company or exact-token evidence is usable. No alert means
+no eligible new group, rather than a promise that the entire catalogue was checked. Topic relevance
+does not establish a profitable deal. Unknown-chain questions and unavailable evidence are withheld.
+Duplicate contract groups are suppressed; changed groups have a one-hour cooldown. At most three
+messages are sent per cycle. Network ambiguity can cause a duplicate on a later retry.
+Telegram credentials are copied privately from the existing owner bot configuration during root activation;
+they never enter this repository. Activation sends a startup confirmation and verifies the timer.
+
 ## Installation
 Run in the existing Hetzner root terminal:
 ```bash
-python3 /var/lib/vivameda-engineering/repo/client_learning/prediction_scanner_v1/install.py --install --expected-sha256 b894122f634aa19a97eddcd876e92d8d5c4b3104abb6fb241de5e6f6faf0afb3
+python3 /var/lib/vivameda-engineering/repo/client_learning/prediction_scanner_v1/install.py --install --expected-sha256 ee6d95b287ce3d871354ed7169f25f364922be16c86a272de17e9c43024fc26b
 ```
-Installer runs42 tests/compilation/systemd syntax, backs up prior scoped source, runs an actual installed
-cycle, requires at least one successful real feed, enables a15-minute timer and verifies runtime hashes.
+Installer runs 58 tests/compilation/systemd syntax, backs up prior scoped source, runs an actual installed
+cycle, requires at least one successful real feed, enables an hourly calendar timer and verifies runtime hashes.
 Failure restores prior source/timer state. It modifies only this new scanner service. State is private under
 /var/lib/vivameda-prediction-scanner; source under /opt/vivameda-prediction-scanner.
 It runs as the existing vivameda-agent user to retain established read permissions.
@@ -37,12 +48,14 @@ Status after installation:
 ```bash
 python3 /opt/vivameda-prediction-scanner/scanner.py status
 systemctl status vivameda-prediction-scanner.timer
+systemctl list-timers vivameda-prediction-scanner.timer
+python3 -c "import json; print(json.load(open('/var/lib/vivameda-prediction-scanner/cycle_latest.json')))"
 ```
 
 ## Development
 ```bash
 cd /var/lib/vivameda-engineering/repo/client_learning/prediction_scanner_v1
-python3 -m unittest -v test_scanner test_ledger
+python3 -m unittest -v test_scanner test_ledger test_notify test_install
 python3 scanner.py scan --state runtime --pages 2 --quote-limit 3
 python3 bridge.py --state runtime --limit 2
 python3 paper.py report --state runtime

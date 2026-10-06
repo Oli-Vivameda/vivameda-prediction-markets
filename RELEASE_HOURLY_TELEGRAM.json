@@ -1,0 +1,20 @@
+{
+  "schema": "prediction-hourly-telegram-release-v1",
+  "date": "2026-10-06",
+  "tests_passed": 58,
+  "unit_syntax_passed": true,
+  "bundle_sha256": "ee6d95b287ce3d871354ed7169f25f364922be16c86a272de17e9c43024fc26b",
+  "cadence": "hourly",
+  "telegram_enabled_in_source": true,
+  "telegram_live_delivery_verified": false,
+  "installed": false,
+  "root_activation_pending": true,
+  "live_check": {
+    "polymarket_records": 200,
+    "kalshi_records": 2000,
+    "candidates": 1,
+    "eligible_notification_groups": 0
+  },
+  "live_execution": false,
+  "paid_provider_requests": 0
+}
