@@ -23,6 +23,16 @@ explicit reviewed fees/slippage and positive conservative expected payout minus 
 assumptions, not real executions. Reviewed final settlement computes forecast diagnostics and simulated P&L.
 No autonomous forecast or paper position has been created.
 
+## Direct market links — 6 October 2026
+The latest link update is tested and staged; root activation is pending. Every displayed candidate
+contract includes an Open market link. Polymarket links retain the parent event slug and select the
+contract with marketSlug; Kalshi links use the first-party series route with marketTicker selection.
+Malformed or missing identifiers withhold that contract. No arbitrary provider URL is forwarded.
+Question/heading text is bounded in UTF-16 units; complete links are never truncated.
+Grouped messages still display at most three contracts; remaining contracts are counted rather than shown.
+64 synthetic tests, compilation and systemd syntax pass. Live destination selection on both venue
+websites remains a manual acceptance check; no Telegram test message was sent during development.
+
 ## Hourly Telegram notifications
 The server scans at each hour with a small randomized delay and resumes after reboot.
 The owner receives grouped research candidates only when the contract is open, the snapshot is fresh,
@@ -37,9 +47,9 @@ they never enter this repository. Activation sends a startup confirmation and ve
 ## Installation
 Run in the existing Hetzner root terminal:
 ```bash
-python3 /var/lib/vivameda-engineering/repo/client_learning/prediction_scanner_v1/install.py --install --expected-sha256 ee6d95b287ce3d871354ed7169f25f364922be16c86a272de17e9c43024fc26b
+python3 /var/lib/vivameda-engineering/repo/client_learning/prediction_scanner_v1/install.py --install --expected-sha256 62c6afca13accebbf18521c791d0aa8c1af01ebc7b5217f13cd72b71bc2a9c42
 ```
-Installer runs 58 tests/compilation/systemd syntax, backs up prior scoped source, runs an actual installed
+Installer runs 64 tests/compilation/systemd syntax, backs up prior scoped source, runs an actual installed
 cycle, requires at least one successful real feed, enables an hourly calendar timer and verifies runtime hashes.
 Failure restores prior source/timer state. It modifies only this new scanner service. State is private under
 /var/lib/vivameda-prediction-scanner; source under /opt/vivameda-prediction-scanner.

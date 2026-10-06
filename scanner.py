@@ -90,6 +90,7 @@ def normalize_poly(raw, observed):
       'yes_token': str(tokens[yi]) if len(tokens)==2 else None,
       'no_token': str(tokens[ni]) if len(tokens)==2 else None,
       'position_ids': positions, 'protocol_version': raw.get('version'),
+      'event_slug': next((e.get('slug') for e in raw.get('events',[]) if isinstance(e,dict) and e.get('slug')),None),
       'slug': raw.get('slug'), 'liquidity_reference': number(raw.get('liquidityNum')),
       'volume_reference': number(raw.get('volumeNum')), 'raw_sha256': digest(raw)
     }

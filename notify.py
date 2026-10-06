@@ -12,11 +12,13 @@ class NoRedirect(HTTPRedirectHandler):
         raise ValueError('Telegram redirect refused')
 
 def send(text, credentials=CREDS):
+    if len(text.encode('utf-16-le'))//2 > 3900:
+        raise ValueError('Telegram message too long; refuse to truncate links')
     c=json.loads(Path(credentials).read_text())
     token=c.get('bot_token'); chat=c.get('chat_id')
     if not isinstance(token,str) or not re.fullmatch(r'[0-9]+:[A-Za-z0-9_-]+',token) or not chat:
         raise ValueError('Configured Telegram destination required')
-    body=urlencode({'chat_id':str(chat),'text':text[:3900],
+    body=urlencode({'chat_id':str(chat),'text':text,
                     'disable_web_page_preview':'true'}).encode()
     req=Request('https://api.telegram.org/bot'+token+'/sendMessage',data=body,method='POST')
     opener=build_opener(ProxyHandler({}),NoRedirect())
@@ -25,6 +27,19 @@ def send(text, credentials=CREDS):
     result=json.loads(raw)
     if result.get('ok') is not True:raise ValueError('Telegram delivery rejected')
     return True
+
+def market_link(m):
+    """Construct first-party links from bounded identifiers, never market text URLs."""
+    def identifier(value):
+        return isinstance(value,str) and len(value)<=200 and re.fullmatch(r'[A-Za-z0-9_-]+',value)
+    if m.get('venue')=='polymarket' and identifier(m.get('slug')):
+        event=m.get('event_slug') or m['slug']
+        if identifier(event):
+            return 'https://polymarket.com/event/'+event+'?'+urlencode({'marketSlug':m['slug']})
+    if m.get('venue')=='kalshi' and identifier(m.get('id')) and identifier(m.get('event_id')):
+        series=m['event_id'].split('-')[0]
+        return 'https://kalshi.com/markets/'+series.lower()+'?'+urlencode({'marketTicker':m['id']})
+    return None
 
 def eligible(root, scan, research, now):
     if not 0<=now-scan.get('generated_at',0)<=900:
@@ -39,7 +54,7 @@ def eligible(root, scan, research, now):
             if scan['feeds'].get(m['venue'],{}).get('error') is not None:continue
             if not 0<=now-m.get('observed_at',0)<=900:continue
             price=s.probability(m.get('yes_price_reference'))
-            if price is None:continue
+            if price is None or market_link(m) is None:continue
             ref=reports.get(m['id'])
             if not ref:continue
             row=db.execute('SELECT at,body FROM evidence WHERE id=?',(ref.get('evidence_id'),)).fetchone()
@@ -62,25 +77,28 @@ def eligible(root, scan, research, now):
             g['items'].append({'market':m,'evidence_id':ref['evidence_id'],'price':price})
     return groups
 
+def bounded_text(value, units):
+    return value.encode('utf-16-le')[:units*2].decode('utf-16-le',errors='ignore')
+
 def message(group):
     items=group['items']
     lines=['VIVAMEDA | Prediction-market research candidate',
-           group['heading'],str(len(items))+' related contract(s).',
+           bounded_text(group['heading'],150),str(len(items))+' related contract(s).',
            'Evidence match found; betting advantage NOT established.']
     for item in items[:3]:
         m=item['market']
-        lines += ['',m['question'][:350],
+        lines += ['',bounded_text(m['question'],250),
                   'Venue: '+m['venue']+' | ID: '+str(m['id'])[:120],
                   'YES reference: '+format(item['price']*100,'.1f')+'% (not an executable quote)',
-                  'Platform deadline: '+m['close_at'],
+                  'Platform deadline: '+m['close_at'][:50],
                   'Retained evidence: '+item['evidence_id'][:16]]
-        slug=m.get('slug')
-        if m['venue']=='polymarket' and isinstance(slug,str) and re.fullmatch(r'[a-zA-Z0-9_-]+',slug):
-            lines.append('https://polymarket.com/event/'+slug)
+        link=market_link(m)
+        if not link:raise ValueError('Direct market link required')
+        lines.append('Open market: '+link)
     if len(items)>3:lines.append('Additional related contracts: '+str(len(items)-3))
     lines += ['', 'Review required: exact identity, settlement rules, fresh evidence, depth and costs.',
               'Our probability: not assessed. Live betting: disabled.']
-    return '\n'.join(lines)[:3900]
+    return '\n'.join(lines)
 
 def dispatch(root, scan, research, sender=send, now=None):
     now=time.time() if now is None else now
