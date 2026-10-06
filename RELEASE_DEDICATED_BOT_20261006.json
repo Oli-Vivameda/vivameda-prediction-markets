@@ -1,0 +1,11 @@
+{
+  "tests_passed": 80,
+  "setup_sha256": "a649a2fba000f66b03da3318315fbb335bff0fafbc5f748ffe7b779dd5b4f4c9",
+  "bundle_sha256": "24d7678c6b11efca27de51e4d76fced4811aabf12fedfc125a1d6fc63e9140d1",
+  "configured": false,
+  "live_pairing_verified": false,
+  "telegram_messages_sent_during_build": 0,
+  "crypto_modified": false,
+  "live_execution": false,
+  "private_runtime_published": false
+}

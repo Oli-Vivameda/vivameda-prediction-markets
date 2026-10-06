@@ -5,11 +5,11 @@ DEST=pathlib.Path('/opt/vivameda-prediction-scanner')
 SYSTEM=pathlib.Path('/etc/systemd/system')
 FILES=('scanner.py','bridge.py','paper.py','cycle.py','notify.py',
        'vivameda-prediction-scanner.service','vivameda-prediction-scanner.timer')
-TESTS=('test_scanner','test_ledger','test_notify','test_install')
-CREDENTIAL_SOURCE=pathlib.Path('/opt/vivameda-crypto-early-scout/credentials.json')
+TESTS=('test_scanner','test_ledger','test_notify','test_install','test_configure_telegram')
+CREDENTIAL_SOURCE=DEST/'telegram_credentials.json'
 
 def digest():
-    names=FILES+('install.py',)+tuple(n+'.py' for n in TESTS)
+    names=FILES+('install.py','configure_telegram.py',)+tuple(n+'.py' for n in TESTS)
     return hashlib.sha256(json.dumps({n:hashlib.sha256((BASE/n).read_bytes()).hexdigest()
             for n in names},sort_keys=True,separators=(',',':')).encode()).hexdigest()
 
@@ -41,7 +41,7 @@ def main():
     if not a.expected_sha256:raise SystemExit('An exact reviewed hash is required')
     if os.geteuid()!=0:raise SystemExit('Root activation required; connector engineering is non-root')
     agent=pwd.getpwnam('vivameda-agent')
-    # Reuse exactly the existing owner bot/destination without exposing them.
+    # Preserve the configured prediction destination, including dedicated bot pairing.
     if CREDENTIAL_SOURCE.is_symlink():raise SystemExit('Symlink credential source refused')
     credentials=json.loads(CREDENTIAL_SOURCE.read_text())
     if not credentials.get('bot_token') or not credentials.get('chat_id'):
@@ -66,7 +66,7 @@ def main():
         for n,target in targets.items():
             shutil.copyfile(BASE/n,target);target.chmod(0o644)
         # Credentials are private, excluded from source, and read only by the service group.
-        shutil.copyfile(CREDENTIAL_SOURCE,creds_target)
+        creds_target.write_text(json.dumps(credentials))
         creds_target.chmod(0o640);os.chown(creds_target,0,agent.pw_gid)
         command(['systemctl','daemon-reload'],timeout=30)
         command(['systemctl','start',FILES[-2]],timeout=650)

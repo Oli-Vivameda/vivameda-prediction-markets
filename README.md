@@ -24,7 +24,7 @@ assumptions, not real executions. Reviewed final settlement computes forecast di
 No autonomous forecast or paper position has been created.
 
 ## Direct market links — 6 October 2026
-The latest link update is tested and staged; root activation is pending. Every displayed candidate
+The link update is installed; runtime hashes and hourly timer independently verified. See ACTIVATION_LINKS_20261006.md. Every displayed candidate
 contract includes an Open market link. Polymarket links retain the parent event slug and select the
 contract with marketSlug; Kalshi links use the first-party series route with marketTicker selection.
 Malformed or missing identifiers withhold that contract. No arbitrary provider URL is forwarded.
@@ -32,6 +32,23 @@ Question/heading text is bounded in UTF-16 units; complete links are never trunc
 Grouped messages still display at most three contracts; remaining contracts are counted rather than shown.
 64 synthetic tests, compilation and systemd syntax pass. Live destination selection on both venue
 websites remains a manual acceptance check; no Telegram test message was sent during development.
+
+## Separate prediction-market Telegram chat
+Dedicated-bot setup is tested and staged; owner pairing is pending.
+Create a new bot using Telegram BotFather /newbot, named Vivameda Prediction Markets.
+Enter its token only into the hidden prompt in the existing Hetzner root terminal:
+```bash
+python3 /var/lib/vivameda-engineering/repo/client_learning/prediction_scanner_v1/configure_telegram.py --expected-sha256 a649a2fba000f66b03da3318315fbb335bff0fafbc5f748ffe7b779dd5b4f4c9
+```
+The setup prints a fresh /start challenge. Send it to the NEW bot from your existing owner Telegram account,
+then press Enter in the terminal. Only fresh private messages from the existing owner can pair.
+Setup checks getMe, rejects the crypto/manager bot and existing webhooks, stops only the prediction
+timer/service during the atomic destination switch, sends a confirmation and resumes the prior timer.
+Confirmation failure restores the prior destination. Never paste tokens in chat, git or command arguments.
+The setup does not modify crypto credentials/services or reset the notification ledger; old alerts are not replayed.
+Scanner code already reads its own credentials file, so no scanner redeployment is needed for this switch.
+Future installs preserve that file instead of copying the crypto credentials back over it.
+80 synthetic tests pass; dedicated live pairing/delivery remain pending.
 
 ## Hourly Telegram notifications
 The server scans at each hour with a small randomized delay and resumes after reboot.
@@ -41,15 +58,15 @@ no eligible new group, rather than a promise that the entire catalogue was check
 does not establish a profitable deal. Unknown-chain questions and unavailable evidence are withheld.
 Duplicate contract groups are suppressed; changed groups have a one-hour cooldown. At most three
 messages are sent per cycle. Network ambiguity can cause a duplicate on a later retry.
-Telegram credentials are copied privately from the existing owner bot configuration during root activation;
+Telegram credentials are configured privately and preserved during root activation;
 they never enter this repository. Activation sends a startup confirmation and verifies the timer.
 
 ## Installation
 Run in the existing Hetzner root terminal:
 ```bash
-python3 /var/lib/vivameda-engineering/repo/client_learning/prediction_scanner_v1/install.py --install --expected-sha256 62c6afca13accebbf18521c791d0aa8c1af01ebc7b5217f13cd72b71bc2a9c42
+python3 /var/lib/vivameda-engineering/repo/client_learning/prediction_scanner_v1/install.py --install --expected-sha256 24d7678c6b11efca27de51e4d76fced4811aabf12fedfc125a1d6fc63e9140d1
 ```
-Installer runs 64 tests/compilation/systemd syntax, backs up prior scoped source, runs an actual installed
+Installer runs 80 tests/compilation/systemd syntax, backs up prior scoped source, runs an actual installed
 cycle, requires at least one successful real feed, enables an hourly calendar timer and verifies runtime hashes.
 Failure restores prior source/timer state. It modifies only this new scanner service. State is private under
 /var/lib/vivameda-prediction-scanner; source under /opt/vivameda-prediction-scanner.
