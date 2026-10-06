@@ -1,0 +1,29 @@
+[Unit]
+Description=Vivameda prediction-market discovery and retained-evidence research
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+User=vivameda-agent
+Group=vivameda-agent
+WorkingDirectory=/opt/vivameda-prediction-scanner
+ExecStart=/usr/bin/python3 /opt/vivameda-prediction-scanner/cycle.py
+StateDirectory=vivameda-prediction-scanner
+StateDirectoryMode=0700
+UMask=0077
+TimeoutStartSec=600
+MemoryMax=512M
+CPUQuota=25%
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictSUIDSGID=yes
+LockPersonality=yes
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+ReadWritePaths=/var/lib/vivameda-prediction-scanner

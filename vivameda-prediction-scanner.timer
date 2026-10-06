@@ -1,0 +1,11 @@
+[Unit]
+Description=Scan prediction markets every fifteen minutes
+
+[Timer]
+OnBootSec=2min
+OnUnitInactiveSec=15min
+RandomizedDelaySec=30
+Unit=vivameda-prediction-scanner.service
+
+[Install]
+WantedBy=timers.target

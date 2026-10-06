@@ -1,0 +1,11 @@
+runtime/
+state/
+company-archive/
+__pycache__/
+*.pyc
+*.sqlite3
+*.sqlite3-*
+.env
+.env.*
+*.pem
+*.key

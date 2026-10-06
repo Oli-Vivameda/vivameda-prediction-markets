@@ -1,0 +1,31 @@
+{
+  "schema": "prediction-scanner-build-v1",
+  "date": "2026-10-06",
+  "tests_passed": 42,
+  "unit_syntax_passed": true,
+  "bundle_sha256": "b894122f634aa19a97eddcd876e92d8d5c4b3104abb6fb241de5e6f6faf0afb3",
+  "live_discovery": {
+    "polymarket_records": 200,
+    "kalshi_records": 2000,
+    "candidates": 8,
+    "company_contracts": 7,
+    "unsupported_crypto_contracts": 1,
+    "coverage": "bounded two-page sample per venue; not full catalogue"
+  },
+  "retained_company_bridge": "OpenAI context retrieved using installed cached-only research workflow",
+  "crypto_bridge_live_verified": false,
+  "forecasts_created": 0,
+  "paper_positions_created": 0,
+  "paid_provider_requests": 0,
+  "live_execution": false,
+  "installed": false,
+  "activation_blocker": "Direct connector has non-root engineering only; no deploy operation for this new service",
+  "limitations": [
+    "Starter company alias list; entity/perimeter and settlement review required",
+    "No calibrated prediction-market event model",
+    "V2 position-book adapter withheld",
+    "Kalshi paper entries require known ask size",
+    "Crypto bridge requires exact mint and retained fresh evidence",
+    "Final settlement entry is reviewed rather than auto-ingested"
+  ]
+}
