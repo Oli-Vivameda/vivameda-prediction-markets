@@ -26,7 +26,34 @@ class Notifications(unittest.TestCase):
         self.assertIn('https://polymarket.com/event/adobe-event?marketSlug=adobe-layoffs',rendered)
     def test_kalshi_link(self):
         self.assertEqual(notify.market_link({'venue':'kalshi','id':'KXIPO-26-OPENAI','event_id':'KXIPO-26'}),
-                         'https://kalshi.com/markets/kxipo?marketTicker=KXIPO-26-OPENAI')
+                         'https://kalshi.com/markets/kxipo?op_market_ticker=KXIPO-26-OPENAI')
+    def test_details_without_platform_page(self):
+        group={'heading':'Adobe','items':[{'market':{'venue':'kalshi','id':'KXIPO-26-ADOBE','event_id':'KXIPO-26','question':'Adobe IPO?',
+             'close_at':'2099-01-01T00:00:00Z','observed_at':1,'rules':'Resolves YES only if the IPO is priced.',
+             'yes_ask':.42,'no_ask':.61,'volume_reference':30},'price':.4,'evidence_id':'abc'}]}
+        text=notify.message(group)
+        self.assertIn('42.0¢ / 61.0¢',text)
+        self.assertIn('Resolves YES only',text)
+        self.assertIn('1970-01-01T00:00:01+00:00',text)
+        self.assertIn('external-api.kalshi.com/trade-api/v2/markets/KXIPO-26-ADOBE',text)
+        self.assertIn('not our forecast',text)
+    def test_no_price_not_invented(self):
+        self.assertEqual(notify.display_price(None),'UNKNOWN')
+        self.assertEqual(notify.display_price(.4),'40.0¢')
+        self.assertEqual(notify.display_number(float('nan')),'UNKNOWN')
+    def test_data_url_identity(self):
+        self.assertIsNone(notify.market_data_link({'venue':'kalshi','id':'../secret'}))
+        self.assertEqual(notify.market_data_link({'venue':'polymarket','id':'123'}),'https://gamma-api.polymarket.com/markets/123')
+    def test_long_rules_three_markets(self):
+        m={'venue':'polymarket','id':'123','slug':'s'*200,'event_slug':'e'*200,'question':'😀'*500,
+           'close_at':'2099-01-01T00:00:00Z','rules':'😀'*5000,'resolution_source':'😀'*500}
+        text=notify.message({'heading':'Test','items':[{'market':m,'price':.5,'evidence_id':'abc'}]*3})
+        self.assertLessEqual(len(text.encode('utf-16-le'))//2,3900)
+        self.assertEqual(text.count('Open market:'),3)
+        self.assertIn('Settlement rules excerpt:',text)
+    def test_venue_routing_distinct(self):
+        self.assertTrue(notify.market_link({'venue':'kalshi','id':'KXIPO-26-O','event_id':'KXIPO-26'}).startswith('https://kalshi.com/'))
+        self.assertTrue(notify.market_link({'venue':'polymarket','id':'123','slug':'openai','event_slug':'ipo'}).startswith('https://polymarket.com/'))
     def test_missing_or_hostile_links_withheld(self):
         for c in self.scan['shortlist']:
             c['market'].update(slug='../bad',event_id='https://evil.example')

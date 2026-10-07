@@ -38,7 +38,7 @@ def market_link(m):
             return 'https://polymarket.com/event/'+event+'?'+urlencode({'marketSlug':m['slug']})
     if m.get('venue')=='kalshi' and identifier(m.get('id')) and identifier(m.get('event_id')):
         series=m['event_id'].split('-')[0]
-        return 'https://kalshi.com/markets/'+series.lower()+'?'+urlencode({'marketTicker':m['id']})
+        return 'https://kalshi.com/markets/'+series.lower()+'?'+urlencode({'op_market_ticker':m['id']})
     return None
 
 def eligible(root, scan, research, now):
@@ -80,25 +80,71 @@ def eligible(root, scan, research, now):
 def bounded_text(value, units):
     return value.encode('utf-16-le')[:units*2].decode('utf-16-le',errors='ignore')
 
+def market_data_link(m):
+    value=m.get('id')
+    if not isinstance(value,str) or len(value)>200 or not re.fullmatch(r'[A-Za-z0-9_-]+',value):return None
+    if m.get('venue')=='kalshi':return s.KALSHI+'/markets/'+value
+    if m.get('venue')=='polymarket':return s.POLY+'/markets/'+value
+    return None
+
+def display_number(value):
+    n=s.number(value)
+    return 'UNKNOWN' if n is None or n<0 else format(n,',.2f')[:24]
+
+def display_price(value):
+    n=s.probability(value)
+    return 'UNKNOWN' if n is None else format(n*100,'.1f')+'¢'
+
+def observed_time(value):
+    n=s.number(value)
+    if n is None:return 'UNKNOWN'
+    try:return s.dt.datetime.fromtimestamp(n,s.dt.timezone.utc).isoformat(timespec='seconds')
+    except (ValueError,OverflowError,OSError):return 'UNKNOWN'
+
 def message(group):
-    items=group['items']
-    lines=['VIVAMEDA | Prediction-market research candidate',
-           bounded_text(group['heading'],150),str(len(items))+' related contract(s).',
-           'Evidence match found; betting advantage NOT established.']
-    for item in items[:3]:
-        m=item['market']
-        lines += ['',bounded_text(m['question'],250),
-                  'Venue: '+m['venue']+' | ID: '+str(m['id'])[:120],
-                  'YES reference: '+format(item['price']*100,'.1f')+'% (not an executable quote)',
-                  'Platform deadline: '+m['close_at'][:50],
-                  'Retained evidence: '+item['evidence_id'][:16]]
-        link=market_link(m)
+    items=group['items'][:3]
+    header=['VIVAMEDA | Prediction-market research candidate',
+            bounded_text(group['heading'],150),str(len(group['items']))+' related contract(s).',
+            'Evidence match found; betting advantage NOT established.']
+    footer=['','Quotes are snapshots, not guaranteed fills. Close time is not necessarily settlement.',
+            'Review identity, full settlement rules, evidence, depth and fees.',
+            'Our probability: not assessed. Live betting: disabled.']
+    if len(group['items'])>3:footer.insert(0,'Additional related contracts: '+str(len(group['items'])-3))
+    blocks=[]
+    for item in items:
+        m=item['market'];link=market_link(m)
         if not link:raise ValueError('Direct market link required')
-        lines.append('Open market: '+link)
-    if len(items)>3:lines.append('Additional related contracts: '+str(len(items)-3))
-    lines += ['', 'Review required: exact identity, settlement rules, fresh evidence, depth and costs.',
-              'Our probability: not assessed. Live betting: disabled.']
-    return '\n'.join(lines)
+        blocks.append(['',bounded_text(str(m['question']),200),
+            'Venue: '+str(m['venue'])+' | ID: '+str(m['id'])[:80],
+            'YES reference: '+format(item['price']*100,'.1f')+'% (not our forecast)',
+            'Ask snapshot YES / NO: '+display_price(m.get('yes_ask'))+' / '+display_price(m.get('no_ask')),
+            'Market closes: '+str(m.get('close_at','UNKNOWN'))[:50],
+            'Observed UTC: '+observed_time(m.get('observed_at')),
+            'Retained evidence: '+str(item['evidence_id'])[:16],
+            'Open market: '+link])
+    units=lambda value:len(value.encode('utf-16-le'))//2
+    def rendered():return '\n'.join(header+[line for block in blocks for line in block]+footer)
+    # Every contract retains its venue and complete first-party link. Allocate
+    # optional research fields within Telegram's UTF-16 budget; never trim URLs.
+    if units(rendered())>3900:raise ValueError('Required market details exceed Telegram limit')
+    for index,(item,block) in enumerate(zip(items,blocks)):
+        m=item['market'];remaining=(3900-units(rendered()))//(len(items)-index)
+        rule=str(m.get('rules') or '')
+        if rule:
+            excerpt=bounded_text(rule,min(320,max(0,remaining-160)))
+            if excerpt:
+                field='Settlement rules excerpt: '+excerpt+(' … [excerpt; review full rules]' if units(rule)>units(excerpt) else '')
+                if units(rendered())+units(field)+1<=3900:block.append(field)
+        else:
+            if units(rendered())+40<=3900:block.append('Settlement rules: UNKNOWN.')
+        data=market_data_link(m)
+        fields=['Full rules / public data (JSON): '+data] if data else []
+        fields+=['Liquidity reference: '+display_number(m.get('liquidity_reference'))+' | Volume reference: '+display_number(m.get('volume_reference'))+' (venue units)',
+                 'Resolution source: '+bounded_text(str(m.get('resolution_source') or 'UNKNOWN; see full rules'),100)]
+        for field in fields:
+            if units(field)+1<=remaining and units(rendered())+units(field)+1<=3900:
+                block.append(field);remaining-=units(field)+1
+    return rendered()
 
 def dispatch(root, scan, research, sender=send, now=None):
     now=time.time() if now is None else now
