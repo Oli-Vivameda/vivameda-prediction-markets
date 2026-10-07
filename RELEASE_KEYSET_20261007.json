@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-07",
+  "status": "installed_source_verified",
+  "tests_passed": 84,
+  "reviewed_bundle": "7a6a6ed81c0ccc743c4c93b3b25da98ae9f98baa5a00afc54687b36b9974a7d6",
+  "scanner_sha256": "b3f583c71b7e158e15f824a5745abfc9fa6236bf15b7034dfe830e562fbff0a8",
+  "timer_active": true,
+  "live_public_two_page_check": {
+    "rows": 200,
+    "overlap": 0,
+    "cursor_advanced": true
+  },
+  "current_production_feed_receipt_verified": false,
+  "new_telegram_delivery_verified": false,
+  "private_data_published": false,
+  "live_execution": false,
+  "paid_provider_requests": 0
+}

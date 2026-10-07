@@ -222,16 +222,28 @@ def scan(root, pages=5, fetch=get, quote_limit=10):
         start = time.time(); run_id = digest([start,os.getpid()])
         reports, candidates, rejected = {}, [], 0
         for venue in ('polymarket','kalshi'):
-            saved = db.execute('SELECT body FROM metadata WHERE key=?',(venue+'_cursor',)).fetchone()
-            cursor = json.loads(saved[0]) if saved else (0 if venue=='polymarket' else '')
+            cursor_key = 'polymarket_keyset_cursor' if venue=='polymarket' else venue+'_cursor'
+            saved = db.execute('SELECT body FROM metadata WHERE key=?',(cursor_key,)).fetchone()
+            cursor = json.loads(saved[0]) if saved else ''
+            if not isinstance(cursor,str) or len(cursor)>4096:
+                raise ValueError('Invalid stored feed cursor')
             count, ended, error, seen = 0, False, None, set()
             try:
                 for page in range(pages):
                     if venue=='polymarket':
-                        data = fetch(POLY+'/markets?'+urlencode({'active':'true','closed':'false','limit':100,'offset':cursor,'order':'id','ascending':'true'}))
-                        rows = data if isinstance(data,list) else data.get('markets')
+                        params={'active':'true','closed':'false','limit':100,'order':'id','ascending':'true'}
+                        if cursor: params['after_cursor']=cursor
+                        data = fetch(POLY+'/markets/keyset?'+urlencode(params))
+                        if not isinstance(data,dict): raise ValueError('Unexpected Polymarket keyset schema')
+                        rows = data.get('markets')
                         if not isinstance(rows,list): raise ValueError('Unexpected Polymarket schema')
-                        next_cursor = cursor+len(rows); ended = len(rows)<100
+                        next_cursor = data.get('next_cursor')
+                        if next_cursor is None: next_cursor=''
+                        if not isinstance(next_cursor,str) or len(next_cursor)>4096:
+                            raise ValueError('Invalid Polymarket cursor')
+                        if next_cursor and (next_cursor==cursor or not rows):
+                            raise ValueError('Repeated or empty page cursor')
+                        ended = not next_cursor
                     else:
                         data = fetch(KALSHI+'/markets?'+urlencode({'status':'open','limit':1000,'mve_filter':'exclude','cursor':cursor}))
                         rows = data.get('markets')
@@ -257,8 +269,8 @@ def scan(root, pages=5, fetch=get, quote_limit=10):
                                            (rid,venue,m['id'],digest(m['rules']),packed(c)))
                         except (ValueError,TypeError,KeyError,IndexError):
                             rejected += 1
-                    cursor = (0 if venue=='polymarket' else '') if ended else next_cursor
-                    db.execute('INSERT OR REPLACE INTO metadata VALUES (?,?)',(venue+'_cursor',packed(cursor)))
+                    cursor = '' if ended else next_cursor
+                    db.execute('INSERT OR REPLACE INTO metadata VALUES (?,?)',(cursor_key,packed(cursor)))
                     db.commit()
                     if ended: break
                     time.sleep(0.1)
@@ -266,7 +278,7 @@ def scan(root, pages=5, fetch=get, quote_limit=10):
                 error = type(exc).__name__ # Never log request headers or remote error body.
             reports[venue] = {'received':count,'reached_end':ended,'error':error,
                               'coverage':'bounded rotating pages; not an exhaustive atomic catalogue',
-                              'next_cursor':cursor}
+                              'next_cursor':cursor,'pagination':'keyset_after_cursor' if venue=='polymarket' else 'cursor'}
         # Research-first shortlist; missing identity/chain candidates remain visible as gaps.
         priority = {'company_research':0,'crypto_research':1,'joint_review':2,'crypto_coverage_gap':3}
         candidates.sort(key=lambda c:(len(c['blockers']),priority[c['routing']['lane']],c['market']['id']))

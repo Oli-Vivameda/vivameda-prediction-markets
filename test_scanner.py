@@ -17,7 +17,7 @@ def kalshi(**kw):
     d.update(kw);return d
 def fixture(url):
     if '/book?' in url:return {'asks':[{'price':'0.6','size':'20'},{'price':'0.4','size':'10'}]}
-    if 'gamma-api' in url:return [poly()]
+    if 'gamma-api' in url:return {'markets':[poly()], 'next_cursor':None}
     return {'markets':[kalshi()], 'cursor':''}
 
 class Contracts(unittest.TestCase):
@@ -110,3 +110,44 @@ class Contracts(unittest.TestCase):
         c=s.candidate(s.normalize_poly(poly(question=q),1),1)
         self.assertFalse(c['live_execution']);self.assertEqual(c['market']['question'],q)
 if __name__=='__main__':unittest.main()
+
+
+class KeysetPagination(unittest.TestCase):
+ def test_old_offset_is_retained_but_not_used(self):
+  from urllib.parse import parse_qs,urlparse
+  with tempfile.TemporaryDirectory() as d:
+   with s.connection(d) as db:db.execute("INSERT INTO metadata VALUES (?,?)",('polymarket_cursor','2100'))
+   seen=[]
+   def fetch(url):
+    if 'gamma-api' in url:
+     seen.append(url);return {'markets':[poly()], 'next_cursor':'page-two'}
+    return {'markets':[], 'cursor':''}
+   s.scan(d,1,fetch,0);s.scan(d,1,lambda u:({'markets':[poly(id='2')], 'next_cursor':None} if 'gamma-api' in u else {'markets':[], 'cursor':''}),0)
+   self.assertIn('/markets/keyset?',seen[0]);self.assertNotIn('offset=',seen[0])
+   with s.connection(d) as db:
+    self.assertEqual(db.execute("SELECT body FROM metadata WHERE key='polymarket_cursor'").fetchone()[0],'2100')
+    self.assertEqual(db.execute("SELECT body FROM metadata WHERE key='polymarket_keyset_cursor'").fetchone()[0],'""')
+ def test_cursor_drives_next_page_even_when_short(self):
+  from urllib.parse import parse_qs,urlparse
+  with tempfile.TemporaryDirectory() as d:
+   urls=[]
+   def fetch(url):
+    if 'gamma-api' not in url:return {'markets':[], 'cursor':''}
+    urls.append(url)
+    return {'markets':[poly(id=str(len(urls)))], 'next_cursor':'abc' if len(urls)==1 else None}
+   out=s.scan(d,2,fetch,0)
+   self.assertEqual(out['feeds']['polymarket']['received'],2)
+   self.assertEqual(parse_qs(urlparse(urls[1]).query)['after_cursor'],['abc'])
+   self.assertTrue(out['feeds']['polymarket']['reached_end'])
+ def test_repeat_cursor_preserves_last_good_page(self):
+  with tempfile.TemporaryDirectory() as d:
+   def fetch(url):return {'markets':[poly()], 'next_cursor':'same'} if 'gamma-api' in url else {'markets':[], 'cursor':''}
+   out=s.scan(d,2,fetch,0)
+   self.assertEqual(out['feeds']['polymarket']['error'],'ValueError')
+   self.assertEqual(out['feeds']['polymarket']['received'],1)
+   self.assertEqual(out['feeds']['polymarket']['next_cursor'],'same')
+ def test_invalid_cursor_rejected_without_advancing(self):
+  with tempfile.TemporaryDirectory() as d:
+   out=s.scan(d,1,lambda u:({'markets':[poly()], 'next_cursor':123} if 'gamma-api' in u else {'markets':[], 'cursor':''}),0)
+   self.assertEqual(out['feeds']['polymarket']['error'],'ValueError')
+   self.assertEqual(out['feeds']['polymarket']['next_cursor'],'')
