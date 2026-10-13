@@ -1,114 +1,49 @@
-# Vivameda prediction-market scanner v1
+# Vivameda prediction markets
 
-Status: deployed on Hetzner on 6 October 2026. Hourly timer active; initial service run succeeded.
-Startup delivery confirmed. Initial cycle read 5,500 records, found 31 research candidates and sent two
-candidate-group notifications with no failures. See DEPLOYMENT_20261006.json for verification provenance.
-Live execution, signing, wallets, paid enrichment and alert-policy changes are absent.
+Two research lanes share this repository. Real-money execution is disabled.
 
-## Behavior
-Public GET adapters discover ordinary binary Polymarket and Kalshi contracts in rotating bounded pages.
-A starter alias registry routes company questions; Solana terms route to crypto research. BTC/ETH coverage
-is withheld. Every candidate retains question, rule text, source fingerprint, deadline and observation time.
-Relevance is a heuristic and never becomes a probability.
+| Lane | Code | Purpose |
+|---|---|---|
+| Company-linked contracts | Repository root | Discover public contracts, retain exact rules, attach bounded company evidence and track reviewed paper forecasts |
+| BTC five-minute outcomes | [btc5m/](btc5m/README.md) | Capture public ticks/books, freeze paper entries, monitor health and test chronological numeric challengers |
 
-The evidence bridge reuses installed cached-only Vivameda Research for bounded descriptive company context,
-once per company/day. Market text is never dispatched as instructions. The Solana bridge reads existing
-fresh retained memory, requiring an exact mint in the question. Generic chain price questions abstain.
-Company and crypto evidence remain separate. The live OpenAI bridge passed; the actual crypto bridge is
-not yet verified on a supported live contract.
+## Company-contract scanner
 
-Researcher forecasts require reviewed identity, rules, scope, current dated evidence and a scan <=15 minutes old.
-They are immutable and labelled unvalidated. Paper entries require a quote <=60 seconds old, observed depth,
-explicit reviewed fees/slippage and positive conservative expected payout minus all-in price. Paper fills are
-assumptions, not real executions. Reviewed final settlement computes forecast diagnostics and simulated P&L.
-No autonomous forecast or paper position has been created.
+Public GET adapters discover ordinary binary Polymarket and Kalshi contracts in rotating bounded pages. A starter company alias registry routes questions for retained evidence. Exact-token crypto evidence is separate; generic chain-price questions abstain. BTC/ETH coverage is withheld by this scanner; the separate BTC lane handles five-minute contracts.
 
-## Direct market links — 6 October 2026
-The link update is installed; runtime hashes and hourly timer independently verified. See ACTIVATION_LINKS_20261006.md. Every displayed candidate
-contract includes an Open market link. Polymarket links retain the parent event slug and select the
-contract with marketSlug; Kalshi links use the first-party series route with marketTicker selection.
-Malformed or missing identifiers withhold that contract. No arbitrary provider URL is forwarded.
-Question/heading text is bounded in UTF-16 units; complete links are never truncated.
-Grouped messages still display at most three contracts; remaining contracts are counted rather than shown.
-64 synthetic tests, compilation and systemd syntax pass. Live destination selection on both venue
-websites remains a manual acceptance check; no Telegram test message was sent during development.
+Candidates retain question, rule text, source fingerprint, deadline and observation time. Relevance is a heuristic and never becomes a probability. Descriptive company context alone does not establish identity, resolution answerability or an investment edge.
 
-## Separate prediction-market Telegram chat
-Dedicated-bot setup is tested and staged; owner pairing is pending.
-Create a new bot using Telegram BotFather /newbot, named Vivameda Prediction Markets.
-Enter its token only into the hidden prompt in the existing Hetzner root terminal:
-```bash
-python3 /var/lib/vivameda-engineering/repo/client_learning/prediction_scanner_v1/configure_telegram.py --expected-sha256 a649a2fba000f66b03da3318315fbb335bff0fafbc5f748ffe7b779dd5b4f4c9
-```
-The setup prints a fresh /start challenge. Send it to the NEW bot from your existing owner Telegram account,
-then press Enter in the terminal. Only fresh private messages from the existing owner can pair.
-Setup checks getMe, rejects the crypto/manager bot and existing webhooks, stops only the prediction
-timer/service during the atomic destination switch, sends a confirmation and resumes the prior timer.
-Confirmation failure restores the prior destination. Never paste tokens in chat, git or command arguments.
-The setup does not modify crypto credentials/services or reset the notification ledger; old alerts are not replayed.
-Scanner code already reads its own credentials file, so no scanner redeployment is needed for this switch.
-Future installs preserve that file instead of copying the crypto credentials back over it.
-80 synthetic tests pass; dedicated live pairing/delivery remain pending.
+Reviewed researcher forecasts are immutable and labelled unvalidated. Paper entries require a fresh quote, observed depth, reviewed fees/slippage and positive conservative expected payout minus all-in price. Paper fills are assumptions, not real executions; settlement requires explicit reviewed final payout.
 
-## Hourly Telegram notifications
-The server scans at each hour with a small randomized delay and resumes after reboot.
-The owner receives grouped research candidates only when the contract is open, the snapshot is fresh,
-a price reference is present and retained company or exact-token evidence is usable. No alert means
-no eligible new group, rather than a promise that the entire catalogue was checked. Topic relevance
-does not establish a profitable deal. Unknown-chain questions and unavailable evidence are withheld.
-Duplicate contract groups are suppressed; changed groups have a one-hour cooldown. At most three
-messages are sent per cycle. Network ambiguity can cause a duplicate on a later retry.
-Telegram credentials are configured privately and preserved during root activation;
-they never enter this repository. Activation sends a startup confirmation and verifies the timer.
+The scanner supports grouped hourly notifications, direct contract links, duplicate suppression and bounded message counts. Destination configuration and credentials stay private. Adding the BTC lane does not change scanner behavior or activate any new notification channel.
 
-## Installation
-Run in the existing Hetzner root terminal:
-```bash
-python3 /var/lib/vivameda-engineering/repo/client_learning/prediction_scanner_v1/install.py --install --expected-sha256 24d7678c6b11efca27de51e4d76fced4811aabf12fedfc125a1d6fc63e9140d1
-```
-Installer runs 80 tests/compilation/systemd syntax, backs up prior scoped source, runs an actual installed
-cycle, requires at least one successful real feed, enables an hourly calendar timer and verifies runtime hashes.
-Failure restores prior source/timer state. It modifies only this new scanner service. State is private under
-/var/lib/vivameda-prediction-scanner; source under /opt/vivameda-prediction-scanner.
-It runs as the existing vivameda-agent user to retain established read permissions.
-Direct engineering runs as vivameda-engineer and has no deployment operation for this service.
+## BTC five-minute paper lab
 
-Status after installation:
-```bash
-python3 /opt/vivameda-prediction-scanner/scanner.py status
-systemctl status vivameda-prediction-scanner.timer
-systemctl list-timers vivameda-prediction-scanner.timer
-python3 -c "import json; print(json.load(open('/var/lib/vivameda-prediction-scanner/cycle_latest.json')))"
-```
+The [BTC lab](btc5m/README.md) uses an uncalibrated volatility/TWAP baseline, immutable trade plans and separate 250 ms/2 s shadow execution arms. It records public reference ticks and book events, pauses entries on unhealthy data and produces private daily reports. No order-submission or signing code exists.
+
+The preregistered study runs 14–28 October 2026 UTC, with independent training, calibration and held-out testing. Two numeric challengers are evaluated against baseline, market and momentum. Count/coverage gates, prediction hashes, realistic depth limitations and no automatic promotion are documented in [the protocol](btc5m/OPS_PROTOCOL.md).
+
+Validation as of 13 October: 74 functional checks and a disposable synthetic challenger pipeline pass. Controlled recovery preserves the journal. Dedicated paper supervision and the daily training-gate timer are active and enabled; the next check is 14 October at 08:05 Asia/Nicosia. First full healthy-day verification, real-data model evaluation and any live execution approval remain pending. No profitable edge is claimed.
 
 ## Development
-```bash
-cd /var/lib/vivameda-engineering/repo/client_learning/prediction_scanner_v1
-python3 -m unittest -v test_scanner test_ledger test_notify test_install
-python3 scanner.py scan --state runtime --pages 2 --quote-limit 3
-python3 bridge.py --state runtime --limit 2
-python3 paper.py report --state runtime
-```
-Do not commit runtime/, cached company archives, forecasts or paper/outcome state.
-This public repository contains reviewed scanner source and aggregate build receipts only.
-Private runtime databases, evidence archives, proprietary datasets and forecasts are excluded.
-The evidence bridge requires separately installed private Vivameda modules; standalone discovery
-and synthetic tests work without them. No proprietary models or datasets are included.
 
-## Limits and next gates
-- The first sample is2,200 records,8 candidates, not the complete catalog or8 independent opportunities.
-  Seven contracts belonged to one OpenAI IPO event. Avoid treating correlated brackets as independent bets.
-- Starter aliases are not full company coverage or verified legal identity. Company mapping must be reviewed.
-- No calibrated prediction-market model; no proved advantage or profitable track record.
-- Position-based Polymarket V2 books are withheld; legacy token books were verified live.
-- Kalshi top-of-book entries need known ask size; missing depth is not an assumed fill.
-- Market endDate/close_time is recorded as a platform deadline; reviewers must establish actual resolution
-  timing, early resolution, source-specific conditions and event dependence before any forecast.
-- Outcomes require explicit reviewed final payout; no automatic oracle settlement ingester yet.
-- Scans are bounded rotating pages; catalogue changes may cause gaps. Reports identify feed errors/coverage.
-- Only in-scope snapshots persist. Database512 MiB guard stops growth and requires archiving; state has
-  no automatic pruning that could erase frozen forecasts.
-- Installation must verify service-user access to actual retained evidence; a descriptive context receipt
-  never certifies identity/perimeter or future-event answerability.
-- Further markets can be added after these two adapters are stable. Live trading requires a separate
-  reviewed approval/execution design and is outside this package.
+The company scanner's standalone discovery and synthetic tests work without proprietary datasets; the evidence bridge requires separately installed private modules. Run the existing scanner tests from the repository root:
+
+```bash
+python3 -m unittest -v test_scanner test_ledger test_notify test_install test_configure_telegram
+```
+
+Run the isolated BTC tests separately to avoid module-name collisions:
+
+```bash
+cd btc5m
+python3 -m unittest discover -s . -q
+```
+
+See [the BTC setup guide](btc5m/README.md), [build status](btc5m/BUILD_STATUS.md), [source hashes](btc5m/SOURCE_MANIFEST.json) and [handover index](HANDOVER_INDEX.md). Existing scanner releases and handovers retain their original provenance.
+
+## Data and execution boundaries
+
+This public repository contains reviewed source, tests, protocols and sanitized validation. It excludes credentials, account observations, raw captures, proprietary datasets, private evidence, forecast journals and learned model binaries. Runtime configuration and deployment paths are supplied privately.
+
+Cloning or updating this repository does not deploy services, train a real-data model or place orders. Missing evidence, unknown costs, incomplete identity and unavailable liquidity are explicit limitations. Real trading requires a separate reviewed execution design and authorization.

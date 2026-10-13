@@ -9,3 +9,25 @@ __pycache__/
 .env.*
 *.pem
 *.key
+
+# Private BTC runtime and learned artifacts
+data/
+reports/
+research/
+training-venv/
+.venv/
+venv/
+*.db
+*.db-*
+*.joblib
+*.pkl
+*.pickle
+*.parquet
+*.jsonl
+*.log
+**/capture-config.json
+**/launch-receipt.json
+**/service-transition.json
+**/ops-heartbeat.json
+**/supervisor-state.json
+**/test-predictions.json
