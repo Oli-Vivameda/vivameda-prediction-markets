@@ -31,3 +31,8 @@ venv/
 **/ops-heartbeat.json
 **/supervisor-state.json
 **/test-predictions.json
+
+# Live pilot credentials and private audit state
+**/pilot-secret.json
+**/pilot-ledger.sqlite3*
+**/pilot.lock

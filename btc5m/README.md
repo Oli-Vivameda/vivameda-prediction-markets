@@ -1,6 +1,6 @@
 # BTC five-minute Polymarket paper lab
 
-A separate research lane in the Vivameda prediction-market repository. It observes public BTC reference ticks and exact five-minute Up/Down contracts, records order-book events, and tests locked paper decisions. No order submission, signer, wallet key or funded execution exists.
+A separate research lane in the Vivameda prediction-market repository. It observes public BTC reference ticks and exact five-minute Up/Down contracts, records order-book events, and tests locked paper decisions. This paper runtime has no order submission or wallet key. Optional owner-run execution source is isolated in [live_pilot/](live_pilot/README.md); it is not activated.
 
 ## Run locally
 

@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-13",
+  "mocked_tests": 19,
+  "sdk_compatibility_passed": true,
+  "sdk": "polymarket-client==0.13.0",
+  "real_orders_submitted": 0,
+  "credentials_read_by_assistant": false,
+  "live_authentication_verified": false,
+  "live_execution_activated": false,
+  "eligibility_status": "unverified_http403",
+  "dedicated_account_connected": false,
+  "paper_strategy_changed": false,
+  "capital_reservation_cap": "10",
+  "reservation_per_attempt": "3",
+  "order_spend_target": "2.75",
+  "sources": {
+    "README.md": "88f446d46fb1f1a950e92fa0d0aac01b5a14543f980d9a80141383d8a1ef42e7",
+    "pilot.py": "63088994c1ce409a2873e1545b2ada32353065e77df3e6b1100e463e7eef1945",
+    "planning.py": "f481321b47ddd1396f487b4dd44e40ded1e6fdac19ff27a2f5b4515bf4b2621f",
+    "requirements.txt": "9bc60a767eb053501f2669a4b7cc24664618da2e895da037a375790c0deba442",
+    "risk.py": "30c52798016f969b95ba150a01adf6b6d688f66289b01e5093936cbdb509a27b",
+    "test_pilot.py": "21dee5f124dfc6ce8c3810e05638cac2e1b230eec50f9bf4a17f95e4b0c3f0d6",
+    "venue.py": "549d8d6797d9ae1be2f08ea9bad988c415b9996d54d015e6e316884f54623022"
+  }
+}

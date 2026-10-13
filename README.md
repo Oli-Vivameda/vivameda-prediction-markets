@@ -1,6 +1,6 @@
 # Vivameda prediction markets
 
-Two research lanes share this repository. Real-money execution is disabled.
+Two research lanes share this repository. Installed services keep real-money execution disabled. Optional live-pilot source requires separate owner operation.
 
 | Lane | Code | Purpose |
 |---|---|---|
@@ -19,7 +19,7 @@ The scanner supports grouped hourly notifications, direct contract links, duplic
 
 ## BTC five-minute paper lab
 
-The [BTC lab](btc5m/README.md) uses an uncalibrated volatility/TWAP baseline, immutable trade plans and separate 250 ms/2 s shadow execution arms. It records public reference ticks and book events, pauses entries on unhealthy data and produces private daily reports. No order-submission or signing code exists.
+The [BTC lab](btc5m/README.md) uses an uncalibrated volatility/TWAP baseline, immutable trade plans and separate 250 ms/2 s shadow execution arms. It records public reference ticks and book events, pauses entries on unhealthy data and produces private daily reports. The running paper lab has no execution adapter enabled. A separate [owner-operated $10 pilot](btc5m/live_pilot/README.md) adds optional execution software; it is unconfigured and blocked pending account and eligibility checks.
 
 The preregistered study runs 14–28 October 2026 UTC, with independent training, calibration and held-out testing. Two numeric challengers are evaluated against baseline, market and momentum. Count/coverage gates, prediction hashes, realistic depth limitations and no automatic promotion are documented in [the protocol](btc5m/OPS_PROTOCOL.md).
 
