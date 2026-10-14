@@ -1,0 +1,15 @@
+{
+  "schema": "broad_polymarket_source.v1",
+  "files": {
+    "PROTOCOL.md": "db56592a885bcc9a635c893cc106ec32d54f832af95a6f4926a965843ec0a78f",
+    "install.py": "3628f4b74b3aeb18520f9102c76506e67d350fe21ec785bc137f7f922c932d6f",
+    "HANDOVER_INDEX.md": "5ffb2f1d4a975d45453d2afa0645416a444c4bd365e8b111698ce7e94a497f8a",
+    "README.md": "499e50800b8e01b72a6cac1735d65af0082628074dc48e83315885b30c411110",
+    "BUILD_STATUS.md": "57c21758f126dd3400011f3674e2e7d0a74402880569408b1f14b25fec77b012",
+    "engine.py": "d12fc849e2ef821bae0d48a2b6800f13781fdbb5a19c4058e1f2cacee15f1a81",
+    "test_engine.py": "c2ab334aa879ab05de6f69c673ced112a04767d8d5d81ae9b02ca0688db79d57",
+    "training.py": "c26c9db11f3d68cf06ebfd402f8115129a7d2fc0d6cf3d5a6e611e2b79d9b94e",
+    "HANDOVER.md": "57452eaac9f9c1b6ea6091d9d69e98511b753e5f3d212386c23638aa1d3e3bef"
+  },
+  "live_execution": false
+}
