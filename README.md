@@ -47,3 +47,8 @@ See [the BTC setup guide](btc5m/README.md), [build status](btc5m/BUILD_STATUS.md
 This public repository contains reviewed source, tests, protocols and sanitized validation. It excludes credentials, account observations, raw captures, proprietary datasets, private evidence, forecast journals and learned model binaries. Runtime configuration and deployment paths are supplied privately.
 
 Cloning or updating this repository does not deploy services, train a real-data model or place orders. Missing evidence, unknown costs, incomplete identity and unavailable liquidity are explicit limitations. Real trading requires a separate reviewed execution design and authorization.
+
+
+## BTC / ETH / SOL five-minute research
+
+The isolated [multi-asset study](crypto5m/README.md) extends the BTC collector with versioned rules, shared fixed-stake paper risk, sequential paired-leg simulation, chronological model interfaces and reporting. [Acceptance](crypto5m/ACCEPTANCE.json): 43 checks and bounded public collection verified. Stage is **collecting data—no validated edge**; required contractual reference inputs are unavailable, so both strategies abstain. [Runbook](crypto5m/RUNBOOK.md). Existing scanner and BTC lanes are preserved.

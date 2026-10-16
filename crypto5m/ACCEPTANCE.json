@@ -1,0 +1,35 @@
+{
+  "schema": "crypto5m.generic-acceptance.v1",
+  "bundle_sha256": "74c408ed22bab790ecd78030fa751cb9516ad6c0c34a10a73847d934fcf74940",
+  "version": "crypto5m-study.v1.1",
+  "synthetic_tests_passed": 43,
+  "tests_passed_locally": true,
+  "tests_passed_on_server": true,
+  "unit_validated": true,
+  "bounded_collection_seconds": 65,
+  "markets": 3,
+  "observations": 15,
+  "capture_verified_events": 244,
+  "public_book_events": 33998,
+  "book_reconnects": {
+    "btc": 8,
+    "eth": 0,
+    "sol": 0
+  },
+  "public_historical_resolution_controls_verified": [
+    "btc",
+    "eth",
+    "sol"
+  ],
+  "historical_controls_ingested": false,
+  "prospective_outcomes": 0,
+  "paper_positions": 0,
+  "persistent_service_installed": false,
+  "live_execution": false,
+  "signer_access": false,
+  "real_budget_changed": false,
+  "existing_units_changed": false,
+  "reference_adapter_connected": false,
+  "edge_validated": false,
+  "stage": "collecting data—no validated edge"
+}

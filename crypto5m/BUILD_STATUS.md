@@ -1,0 +1,7 @@
+# Build status — v1.1
+
+Reviewed source bundle 74c408ed22bab790ecd78030fa751cb9516ad6c0c34a10a73847d934fcf74940. Forty-three local and Hetzner synthetic/regression checks pass; systemd unit validates. A 65-second prospective source run observed three markets, 15 decision snapshots and 244 integrity-verified capture envelopes, processing 33,998 public book events. Supporting exchange feed connected without sequence gaps in this short run. BTC had eight reconnects, recorded explicitly; ETH and SOL had none. Entries remained disabled by missing contractual reference/opening TWAP or incomplete stream snapshots; no paper positions were created. Virtual cash remains 10,000.
+
+Public historical resolution adapter controls passed for all three assets; those control outcomes were not ingested into this prospective study. No prospective resolution or fill is claimed. Candidate source/captures are retained separately; no history was reset. Original service definitions and real owner-stop were verified unchanged. Persistent service installation remains pending: the bounded collector has stopped, and the reviewed installer resumes the same source/config-pinned study.
+
+Status: collecting data—no validated edge. Authenticated contractual reference integration, full continuous coverage, credible alternate-delay replay, real forward fills/settlements, sufficient chronological calibration and frozen final evaluation remain open. Reference inputs are not replaced by supporting exchange prices. No signer, real order, budget change, paid call or automatic promotion.

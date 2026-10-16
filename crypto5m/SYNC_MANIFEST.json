@@ -1,0 +1,28 @@
+{
+  "schema": "crypto5m.source-manifest.v1",
+  "canonical_repository": "Oli-Vivameda/vivameda-prediction-markets",
+  "lane": "crypto5m/",
+  "bundle_sha256": "74c408ed22bab790ecd78030fa751cb9516ad6c0c34a10a73847d934fcf74940",
+  "files": {
+    "common.py": "5b8d96efbec156d256d55d365adf63506e2a5096831aa8ee2fd6c34e29a3dd34",
+    "capture.py": "e3e99cb58e8830056bff0ee349afb3fd999278d8676d9c937a64bc37f9243b54",
+    "transport.py": "d260972342b2a4c2f64ff16a4b5991a5dfbad91c5cb12df07429926515888539",
+    "market.py": "ecc5c8acd7c20c870e93f456b06b486fb16a211210619f9b66be6b880218e5ba",
+    "feeds.py": "5d9e80ba01b6a6da944335be23c88a95e9f3fc69972a2cfff9e9fa437db7478b",
+    "model.py": "0efb98b1ef1fb7fc6058b4fa6bfcf58905708731c2e8190c2d693d0f650f3704",
+    "strategy.py": "810c28690acedfc47e53bb5399ed22a398e1c194a9e24b24734662451176d3f3",
+    "ledger.py": "5748d28033d7bbb8620fee069f9fdf162df9c3663911195897287d73526ea3f2",
+    "worker.py": "e426b56a15ea56b5158ea1918940b57d28ae1c1c168a8ad94bd472fd5d4b8c0d",
+    "report.py": "b30e93e603276b4155103c1eefff3f08d0484155b346100862502c676fdb54f7",
+    "release.py": "1e3f7792692283282ed16e9b16369623ff07668a4c50c007ca59b3383b010133",
+    "install.py": "59cc4499a8e57e68eec3c4d7c74c82f687ce9bcfc81c43edf37181d7a05c21cb",
+    "test_study.py": "4f32a00bbdc1ba9c172338c94f0000a8012efbc0760d8fd4e613e80fc68ba10c",
+    "config.json": "239bf91cffdfef82ee333355a01bdd9bf07db78ef038f3d7012dadc1683f4544",
+    "PROTOCOL.md": "856b59dccd26e1d35403001b2ff2d09a6d2a960dc511895c46e5fa2a3fbbb5c4"
+  },
+  "tests": 43,
+  "source_operation_verified": true,
+  "persistent_service_installed": false,
+  "raw_records_uploaded": false,
+  "live_execution": false
+}

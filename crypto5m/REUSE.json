@@ -1,0 +1,9 @@
+{
+  "source": "Existing deployed BTC paper collector",
+  "runtime_bundle": "5f2a3b53f85f7c0514dec1444f4fc1817fb150b9b8a65c8193bedb790cf4682b",
+  "capture_source_sha256": "f993381bc87bb1102ccc2eed0628b5e533ca9e7c296a9f64ad2a54ebd8f01009",
+  "transport_container_source_sha256": "b8c5060f2f4c44e871632bd710e8320a88f532b15f65e14eeec5da58d5a30e67",
+  "deployed_source_match_verified": true,
+  "extraction": "Capture writer/verification code without BTC storage loader; PublicSocket class without application imports",
+  "existing_runtime_changed": false
+}
