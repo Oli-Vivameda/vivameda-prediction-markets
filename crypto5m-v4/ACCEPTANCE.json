@@ -1,0 +1,35 @@
+{
+  "schema": "crypto5m.generic-acceptance.v4",
+  "bundle_sha256": "275b728b1f972f2b6cba5b37dabe443d4c9e76e0f2aef47a6b1a24a852e4e7f3",
+  "parent_bundle_v3": "76b4c6e51bd58c74988877d16becdc7e8a4537e87b71dc35a8b70b753d545364",
+  "synthetic_tests_passed": 81,
+  "tests_passed_locally": true,
+  "tests_passed_on_server": null,
+  "synthetic_worker_lifecycle_passed": true,
+  "local_benchmark_us_per_event": {
+    "v3": 690,
+    "v4": 20
+  },
+  "bounded_candidate_run": null,
+  "persistent_service_installed": false,
+  "v3_candidate_baseline": {
+    "stream_lag_median_s": {
+      "btc": 38.15,
+      "eth": 42.58,
+      "sol": 32.74
+    },
+    "book_disconnects_600s": {
+      "btc": 5,
+      "eth": 13,
+      "sol": 12
+    },
+    "worker_cpu_core_fraction_in_diagnostic": 1.054
+  },
+  "original_studies_preserved": true,
+  "live_execution": false,
+  "signer_access": false,
+  "paid_calls": 0,
+  "real_budget_changed": false,
+  "edge_validated": false,
+  "stage": "built and synthetically verified; server verification pending"
+}
