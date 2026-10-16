@@ -1,0 +1,19 @@
+{
+  "schema": "crypto5m-final60.generic-acceptance.v1",
+  "bundle_sha256": "45fe476c02760baf6204a9b922987bad3229a670354142a94383600852b04bfe",
+  "infrastructure_bundle_v5": "9bcc18aace069035f5c3e9debad7c98af947117cd6ad52d70023f40bcdec79eb",
+  "synthetic_tests_passed": 108,
+  "tests_passed_locally": true,
+  "tests_passed_on_server": null,
+  "synthetic_worker_lifecycle_passed": true,
+  "bounded_candidate_run": null,
+  "persistent_service_installed": false,
+  "twap_reconstruction_comparisons": 0,
+  "original_studies_preserved": true,
+  "live_execution": false,
+  "signer_access": false,
+  "paid_calls": 0,
+  "real_budget_changed": false,
+  "edge_validated": false,
+  "stage": "built and synthetically verified; server verification pending"
+}
