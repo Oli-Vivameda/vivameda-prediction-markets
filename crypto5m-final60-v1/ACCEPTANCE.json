@@ -4,16 +4,251 @@
   "infrastructure_bundle_v5": "9bcc18aace069035f5c3e9debad7c98af947117cd6ad52d70023f40bcdec79eb",
   "synthetic_tests_passed": 108,
   "tests_passed_locally": true,
-  "tests_passed_on_server": null,
+  "tests_passed_on_server": true,
   "synthetic_worker_lifecycle_passed": true,
-  "bounded_candidate_run": null,
+  "bounded_candidate_run": {
+    "passed": false,
+    "requested_worker_seconds": 900,
+    "clean_completion_proven": false,
+    "execution_interrupted": true,
+    "wrapper_exit_code": -9,
+    "process_elapsed_seconds": 900.0388145446777,
+    "last_persisted_status_span_seconds": 895.1785004138947,
+    "device": 2064,
+    "gates": {
+      "book_disconnects": true,
+      "bundle_and_22_files_unchanged": true,
+      "capture_verified": true,
+      "cpu_recorded_below_core": true,
+      "final_minute_forecasts_two_assets": false,
+      "ledger_reopened": true,
+      "no_log_exceptions": true,
+      "no_rule_refresh_connection_failure": true,
+      "reference_connected": true,
+      "stream_lag": true,
+      "three_twap_comparisons": true,
+      "worker_completed": false
+    },
+    "assets": {
+      "btc": {
+        "above_3_seconds": 0,
+        "above_3_time_fraction": 0,
+        "crossing_episodes": 66,
+        "crossing_max_events": 4,
+        "crossing_max_seconds_resolved": 0.00897359848022461,
+        "crossings_resolved": 66,
+        "disconnects": 0,
+        "events": 588665,
+        "feed_instances": 4,
+        "frames": 590347,
+        "lag_samples": 861,
+        "last_invalid_level": null,
+        "late_deltas_applied": 0,
+        "measured_seconds": 892.8676147460938,
+        "persistent_crossed_book_resyncs": 0,
+        "processing_seconds_max_frame": 0.012573685497045517,
+        "processing_seconds_total": 51.83602284640074,
+        "resync_reasons": {},
+        "rule_refresh_errors": 0,
+        "rule_refreshes": 6,
+        "stream_lag_max": 1.3575706481933594,
+        "stream_lag_median": 0.04234004020690918,
+        "stream_lag_p95": 0.06614303588867188,
+        "superseded_deltas": 68,
+        "superseded_snapshots": 19,
+        "unknown_seconds": 5.339396953582764,
+        "last_invalid_level_reports": 0
+      },
+      "eth": {
+        "above_3_seconds": 0,
+        "above_3_time_fraction": 0,
+        "crossing_episodes": 0,
+        "crossing_max_events": 0,
+        "crossing_max_seconds_resolved": 0,
+        "crossings_resolved": 0,
+        "disconnects": 0,
+        "events": 268521,
+        "feed_instances": 4,
+        "frames": 270198,
+        "lag_samples": 862,
+        "last_invalid_level": null,
+        "late_deltas_applied": 0,
+        "measured_seconds": 894.0046610832214,
+        "persistent_crossed_book_resyncs": 0,
+        "processing_seconds_max_frame": 0.0038223974406719208,
+        "processing_seconds_total": 24.354421816766262,
+        "resync_reasons": {},
+        "rule_refresh_errors": 0,
+        "rule_refreshes": 5,
+        "stream_lag_max": 1.4125258922576904,
+        "stream_lag_median": 0.042206406593322754,
+        "stream_lag_p95": 0.07236329317092886,
+        "superseded_deltas": 0,
+        "superseded_snapshots": 0,
+        "unknown_seconds": 4.204909801483154,
+        "last_invalid_level_reports": 0
+      },
+      "sol": {
+        "above_3_seconds": 0,
+        "above_3_time_fraction": 0,
+        "crossing_episodes": 4,
+        "crossing_max_events": 1,
+        "crossing_max_seconds_resolved": 0.0001304149627685547,
+        "crossings_resolved": 4,
+        "disconnects": 0,
+        "events": 208339,
+        "feed_instances": 4,
+        "frames": 210016,
+        "lag_samples": 861,
+        "last_invalid_level": null,
+        "late_deltas_applied": 0,
+        "measured_seconds": 892.8543176651001,
+        "persistent_crossed_book_resyncs": 0,
+        "processing_seconds_max_frame": 0.006335761398077011,
+        "processing_seconds_total": 19.19381272047758,
+        "resync_reasons": {},
+        "rule_refresh_errors": 0,
+        "rule_refreshes": 5,
+        "stream_lag_max": 2.02699613571167,
+        "stream_lag_median": 0.04207873344421387,
+        "stream_lag_p95": 0.06714916229248047,
+        "superseded_deltas": 0,
+        "superseded_snapshots": 4,
+        "unknown_seconds": 5.357504367828369,
+        "last_invalid_level_reports": 0
+      }
+    },
+    "cpu": {
+      "logical_cores": 8,
+      "max_percent_one_core": 39.690072635871786,
+      "median_percent_one_core": 23.74566783525812,
+      "samples": 179
+    },
+    "final_minute_forecasts_by_asset": {
+      "btc": 0,
+      "eth": 0,
+      "sol": 0
+    },
+    "final_minute_windows_observed_by_asset": {
+      "btc": 3,
+      "eth": 3,
+      "sol": 3
+    },
+    "observations_by_asset": {
+      "btc": 115,
+      "eth": 115,
+      "sol": 115
+    },
+    "twap_reconstruction": {
+      "comparisons": 18,
+      "limit_bps": 1,
+      "max_abs_error_bps": 0.13135720549557892,
+      "median_abs_error_bps": 0.08641022696664966,
+      "preregistered_check_first_100_median_bps": null,
+      "standard_median_abs_error_bps": 0.08641022696664966,
+      "unique_asset_boundary_comparisons": 9,
+      "unusable": 0,
+      "unusable_unique_windows": 0
+    },
+    "model_vs_market_same_observation": {
+      "baseline": {
+        "brier": null,
+        "calibration": [],
+        "n": 0
+      },
+      "brier_difference_model_minus_market": null,
+      "by_asset": {},
+      "by_remaining_band": {},
+      "market": {
+        "brier": null,
+        "calibration": [],
+        "n": 0
+      },
+      "note": "Negative difference means the model beat the market-implied probability on identical rows.",
+      "shadow_fat_tail_model": {
+        "brier": null,
+        "calibration": [],
+        "n": 0
+      }
+    },
+    "official_outcomes": 9,
+    "reservations": 0,
+    "attempts": 0,
+    "fills": 0,
+    "attempt_rejection_reasons": {},
+    "decision_reasons": {
+      "directional:SKIP:empty_book_no_executable_quote": 180,
+      "directional:SKIP:outside_final_minute": 122,
+      "directional:SKIP:reference_gap_or_stale": 27,
+      "directional:SKIP:reference_stale": 9,
+      "directional:SKIP:spread_limit": 1,
+      "directional:SKIP:waiting_for_full_stream_books": 6
+    },
+    "realized_losses": {
+      "cumulative": "0",
+      "day": "0"
+    },
+    "day_halts": [],
+    "halted": false,
+    "entries_halted_today": false,
+    "portfolio": {
+      "available": "10000",
+      "cash": "10000",
+      "cost_basis_equity": "10000",
+      "credits": "0",
+      "equity_lower_bound": "10000",
+      "open_cost": "0",
+      "reserved": "0",
+      "spent": "0"
+    },
+    "reference_error": null,
+    "reference_disconnects": 0,
+    "committed_capture_events_verified": 5128,
+    "capture_dropped_last_status": 0,
+    "worker_log_exception_count": 0,
+    "source_pinned_files_verified": 22,
+    "final_minute_skip_reasons_by_asset": {
+      "btc": {
+        "SKIP:empty_book_no_executable_quote": 55,
+        "SKIP:reference_gap_or_stale": 10,
+        "SKIP:reference_stale": 4
+      },
+      "eth": {
+        "SKIP:empty_book_no_executable_quote": 58,
+        "SKIP:reference_gap_or_stale": 8,
+        "SKIP:reference_stale": 3
+      },
+      "sol": {
+        "SKIP:empty_book_no_executable_quote": 57,
+        "SKIP:reference_gap_or_stale": 9,
+        "SKIP:reference_stale": 2,
+        "SKIP:spread_limit": 1
+      }
+    }
+  },
   "persistent_service_installed": false,
-  "twap_reconstruction_comparisons": 0,
+  "twap_reconstruction_comparisons": 18,
   "original_studies_preserved": true,
   "live_execution": false,
   "signer_access": false,
   "paid_calls": 0,
   "real_budget_changed": false,
   "edge_validated": false,
-  "stage": "built and synthetically verified; server verification pending"
+  "stage": "candidate failed; not installed",
+  "source_commit": "159e2bcd1dfeb21f6944a610abbaa0df4c9dbdcd",
+  "checkout_commit": "27a0418772b87f0694ccd6a67e3e0c428233789a",
+  "source_lane_tree_sha": "6c46ea03f92d694b91193f9ce24d8a2c133f458e",
+  "server_test_count": 108,
+  "synthetic_worker_lifecycle_passed_on_server": true,
+  "two_minute_installed_health_check": null,
+  "failed_gates": [
+    "No final-minute forecasts on any asset; at least two assets required.",
+    "Engineering wrapper interrupted with exit -9 before clean 900-second completion could be proven."
+  ],
+  "reporting_caveats": {
+    "unique_markets_with_price_reported": 18,
+    "independently_counted_eligible_priced_markets": 9,
+    "note": "report.py reuses its first variable for reconstruction errors, so its unique_markets_with_price value is incorrect. Maximum absolute reconstruction error was calculated externally. No pinned code changed."
+  },
+  "next_gate": "Stop and report. Investigate zero forecasts without weakening guards; a new candidate needs an execution method that permits 900 seconds plus startup/shutdown overhead. Any source fix must be a new reviewed version. The first-100 reconstruction gate and 7/3/4/28-day accumulation have not started."
 }
