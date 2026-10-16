@@ -52,3 +52,8 @@ Cloning or updating this repository does not deploy services, train a real-data 
 ## BTC / ETH / SOL five-minute research
 
 The isolated [multi-asset study](crypto5m/README.md) extends the BTC collector with versioned rules, shared fixed-stake paper risk, sequential paired-leg simulation, chronological model interfaces and reporting. [Acceptance](crypto5m/ACCEPTANCE.json): 43 checks and bounded public collection verified. Stage is **collecting data—no validated edge**; required contractual reference inputs are unavailable, so both strategies abstain. [Runbook](crypto5m/RUNBOOK.md). Existing scanner and BTC lanes are preserved.
+
+
+## Public-reference paper extension (v2)
+
+[Version 2](crypto5m-v2/README.md) adds public legacy Chainlink raw/TWAP snapshots and empty-book recovery in a separate study. No credentials or live execution. The legacy endpoint is retiring; stale/incomplete inputs still cause abstention. See [build status](crypto5m-v2/BUILD_STATUS.md) for current operational verification and installation status.
