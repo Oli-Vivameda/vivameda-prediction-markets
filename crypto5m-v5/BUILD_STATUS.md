@@ -4,7 +4,7 @@ Source commit 0446998e2a4199b85337590514b333de8ab6d584; bundle 9bcc18aace069035f
 
 Server verification on 16 October 2026: exact bundle and all 21 source hashes matched; 90 tests OK; synthetic lifecycle passed. The new 600-second candidate completed normally (600.891 seconds including setup/shutdown), on device 2064. All candidate gates passed. The candidate was archived separately and will never be reused as final state.
 
-Persistent installation and the two-minute installed health check remain pending. The direct engineering connection runs as non-root UID 994; the installer requires root. The exact owner root command and prepared read-only health checker are in the server Astra handover. No v5 runtime, unit or final state has been installed by this task. v2 remains active with zero restarts.
+Owner installation completed 16 October 2026 at 17:38:16 UTC. The health check passed at 17:40:24 UTC (service age 128 seconds): active, enabled, zero restarts; all 21 runtime hashes matched; fresh captures, connected reference and usable books; virtual cash 10,000. An independent server read reconfirmed the runtime hashes, correct device 2064 and both v5 and v2 active/enabled with zero restarts. No existing service was changed.
 
 | Asset | v5 lag median / p95 / max (s) | Time above 3 s | Disconnects v5 / v4 |
 |---|---|---|---|
@@ -30,4 +30,6 @@ Lag quantiles use approximately one-second captured worker states. Above-thresho
 
 All 21 pinned source files remained unchanged. v2 state, v4/v3 candidate archives, lag diagnostic archive and v1.1 were untouched. Paper only; no signer, credentials, account actions, paid calls, real budget changes or live orders. Inherited RUNBOOK venue-lag and rollback-v3 lines remain inconsistent with authoritative HANDOVER; pinned files were not edited.
 
-Next gate: root installation in a NEW final state, then independent health after two minutes (including 21 runtime hashes and virtual cash check). The 48-hour parallel observation clock starts only after that passes; the owner then decides about v2.
+Next gate: 48 hours of parallel paper observation, starting at the passed health check on 16 October 2026 at 17:40:24 UTC (20:40:24 Cyprus), with earliest owner review on 18 October 2026 at 17:40:24 UTC (20:40:24 Cyprus). Leave v2 running until the owner decides. No automatic promotion, v2 shutdown or live execution is authorized.
+
+Installation health is separate from the candidate figures above. At the two-minute health check, all three current book feeds had zero disconnects and roughly 41–44 ms stream lag, no invalid levels, no resync reasons and no rule-refresh errors. BTC had eight short crossing episodes, all resolved, at the later independent read. No installed realized loss or halt was observed. Full installed generic figures are in ACCEPTANCE.json. The pre-install candidate archive remains separate and was not reused or altered during post-install verification.

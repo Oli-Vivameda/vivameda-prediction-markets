@@ -181,7 +181,7 @@
     "worker_log_exception_count": 0,
     "source_pinned_files_verified": 21
   },
-  "persistent_service_installed": false,
+  "persistent_service_installed": true,
   "v4_candidate_baseline": {
     "stream_lag_median_s": {
       "btc": 0.0422,
@@ -217,14 +217,111 @@
   "paid_calls": 0,
   "real_budget_changed": false,
   "edge_validated": false,
-  "stage": "server candidate passed; root installation and health check pending",
+  "stage": "installed and healthy; parallel paper observation in progress",
   "source_commit": "0446998e2a4199b85337590514b333de8ab6d584",
   "server_test_count": 90,
   "synthetic_worker_lifecycle_passed_on_server": true,
-  "installation_status": "candidate passed; root installation pending because the engineering connector runs as UID 994",
-  "two_minute_installed_health_check": null,
+  "installation_status": "installed by owner; independently verified through server connection",
+  "two_minute_installed_health_check": {
+    "passed": true,
+    "checked_at": 1792172424.4684248,
+    "service_age_seconds": 128.0332530103624,
+    "gates": {
+      "active_enabled_zero_restarts": true,
+      "all_21_runtime_hashes": true,
+      "current_books_lag_and_disconnects": true,
+      "fresh_capture_writes": true,
+      "paper_only": true,
+      "reference_connected": true,
+      "v2_still_running": true,
+      "virtual_cash_10000": true
+    },
+    "virtual_cash": "10000",
+    "runtime_file_hashes_verified": 21,
+    "service_active": true,
+    "service_enabled": true,
+    "service_restarts": 0,
+    "reference_error": null,
+    "reference_disconnects": 0,
+    "capture_records": 651,
+    "capture_dropped": 0,
+    "book_feeds": {
+      "btc": {
+        "stream_lag": 0.043924808502197266,
+        "disconnects": 0,
+        "crossing_episodes": 0,
+        "crossings_resolved": 0,
+        "resync_reasons": {},
+        "last_invalid_level": null,
+        "rule_refreshes": 1,
+        "rule_refresh_errors": 0
+      },
+      "eth": {
+        "stream_lag": 0.040708065032958984,
+        "disconnects": 0,
+        "crossing_episodes": 0,
+        "crossings_resolved": 0,
+        "resync_reasons": {},
+        "last_invalid_level": null,
+        "rule_refreshes": 1,
+        "rule_refresh_errors": 0
+      },
+      "sol": {
+        "stream_lag": 0.04386258125305176,
+        "disconnects": 0,
+        "crossing_episodes": 0,
+        "crossings_resolved": 0,
+        "resync_reasons": {},
+        "last_invalid_level": null,
+        "rule_refreshes": 1,
+        "rule_refresh_errors": 0
+      }
+    }
+  },
   "v2_service_active": true,
   "v2_service_restarts": 0,
   "protected_states_and_archives_accessed": false,
-  "next_gate": "Root installation into a new final state, then the two-minute health check. Only then begin 48 hours of parallel observation; the owner decides about v2."
+  "next_gate": "48 hours of parallel observation from the passed health check, then owner review. Preserve v2 until the owner decides; no automatic promotion or live execution.",
+  "installed_at": 1792172296.4476902,
+  "independent_post_install_verification": {
+    "checked_at": 1792172600.0615375,
+    "runtime_hashes_match": true,
+    "state_device": 2064,
+    "v2_running": true,
+    "v2_restarts": 0,
+    "v5_running": true,
+    "v5_restarts": 0,
+    "live_execution": false,
+    "signer_access": false,
+    "realized_losses": {
+      "cumulative": "0",
+      "day": "0"
+    },
+    "halted": false,
+    "book_stream_lag_seconds": {
+      "btc": 0.04314875602722168,
+      "eth": 0.04075312614440918,
+      "sol": 0.04213976860046387
+    }
+  },
+  "installed_prospective_counts": {
+    "attempts": 2,
+    "fills": 0,
+    "forecasts_by_asset": {
+      "btc": 9,
+      "eth": 8,
+      "sol": 9
+    },
+    "rejection_reasons": {
+      "no_post_delay_liquidity": 2
+    },
+    "reservations": 2
+  },
+  "parallel_observation": {
+    "started_at": 1792172424.4684248,
+    "earliest_owner_review_at": 1792345224.4684248,
+    "duration_hours": 48,
+    "v2_preserved": true,
+    "automatic_v2_shutdown": false
+  }
 }
