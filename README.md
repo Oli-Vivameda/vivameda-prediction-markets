@@ -57,3 +57,7 @@ The isolated [multi-asset study](crypto5m/README.md) extends the BTC collector w
 ## Public-reference paper extension (v2)
 
 [Version 2](crypto5m-v2/README.md) adds public legacy Chainlink raw/TWAP snapshots and empty-book recovery in a separate study. No credentials or live execution. The legacy endpoint is retiring; stale/incomplete inputs still cause abstention. See [build status](crypto5m-v2/BUILD_STATUS.md) for current operational verification and installation status.
+
+## Candidate archive policy — 16 October 2026
+
+The failed `crypto5m-v3/` and `crypto5m-v4/` candidates are retained at archive tag `archive/crypto5m-candidates-20261016`. Publish and verify that tag before merging this cleanup into main. Their removal affects repository organization only. Preserve `crypto5m/` (v1.1), `crypto5m-v2/` and `crypto5m-v5/`; no installed service or runtime state changes. Future versions use Git branches or tags, not copied folders. Other pre-existing lanes are outside this cleanup.
