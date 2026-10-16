@@ -10,3 +10,5 @@
 8. Financial boundaries: virtual ledger only; no signer, credentials, account actions, paid calls or real budget changes.
 9. Rollback: stop only new unit; preserve v2 ledger, v1.1 service and captures; no in-place source migration.
 10. Next gate: server verification, hash-reviewed installation and independent deployed health check, then chronological calibration/forward evaluation.
+
+Post-install: owner receipt independently verified at 14:16:40 UTC; active/enabled, zero restarts, 17 matching runtime hashes, fresh reference/capture and intact ledger. Zero prospective fills. Continue checking book continuity and first eligible full-window paper fill/settlement; no activation of live trading.

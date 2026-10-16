@@ -33,7 +33,7 @@
   },
   "reference_feed_retiring": true,
   "reference_sequence_available": false,
-  "persistent_service_installed": false,
+  "persistent_service_installed": true,
   "original_study_preserved": true,
   "real_owner_stop_retained": true,
   "live_execution": false,
@@ -49,5 +49,22 @@
     "attempts": 2,
     "filled_attempts": 0,
     "official_outcomes": 2
+  },
+  "post_install_verification": {
+    "verified_at_utc": "2026-10-16T14:16:40Z",
+    "active": true,
+    "enabled": true,
+    "restarts": 0,
+    "runtime_source_hashes_match": true,
+    "fresh_capture_verified": true,
+    "capture_verified_events": 606,
+    "observations": 36,
+    "official_outcomes": 3,
+    "filled_attempts": 0,
+    "reference_connected": true,
+    "reference_disconnects": 0,
+    "books": "degraded: stale/regressing deltas; resynchronization and abstention active",
+    "ledger_integrity_verified": true,
+    "real_owner_stop_retained": true
   }
 }
