@@ -4,13 +4,164 @@
   "parent_bundle_v3": "76b4c6e51bd58c74988877d16becdc7e8a4537e87b71dc35a8b70b753d545364",
   "synthetic_tests_passed": 81,
   "tests_passed_locally": true,
-  "tests_passed_on_server": null,
+  "tests_passed_on_server": true,
   "synthetic_worker_lifecycle_passed": true,
   "local_benchmark_us_per_event": {
     "v3": 690,
     "v4": 20
   },
-  "bounded_candidate_run": null,
+  "bounded_candidate_run": {
+    "passed": false,
+    "duration_seconds": 600.8749237060547,
+    "worker_seconds": 600,
+    "device": 2064,
+    "exit_code": 0,
+    "gates": {
+      "book_disconnects": false,
+      "bundle_unchanged": true,
+      "capture_verified": true,
+      "cpu_recorded_below_core": true,
+      "forecasts_two_assets": true,
+      "ledger_reopened": true,
+      "no_log_exceptions": true,
+      "no_rule_refresh_connection_failure": true,
+      "reference_connected": true,
+      "stream_lag": true,
+      "worker_completed": true
+    },
+    "assets": {
+      "btc": {
+        "above_3_seconds": 0,
+        "above_3_time_fraction": 0,
+        "disconnects": 9,
+        "events": 280180,
+        "feed_instances": 3,
+        "frames": 280986,
+        "lag_samples": 555,
+        "late_deltas_applied": 0,
+        "measured_seconds": 570.17791223526,
+        "processing_seconds_max_frame": 0.005812514573335648,
+        "processing_seconds_total": 24.250135358422995,
+        "resync_reasons": {
+          "ConnectionError": 1,
+          "crossed_book": 8
+        },
+        "rule_refresh_errors": 0,
+        "rule_refreshes": 13,
+        "stream_lag_max": 0.5668821334838867,
+        "stream_lag_median": 0.04219770431518555,
+        "stream_lag_p95": 0.06543731689453125,
+        "superseded_deltas": 83,
+        "superseded_snapshots": 2,
+        "unknown_seconds": 29.332894325256348,
+        "last_invalid_level_reports": 0
+      },
+      "eth": {
+        "above_3_seconds": 0,
+        "above_3_time_fraction": 0,
+        "disconnects": 0,
+        "events": 115733,
+        "feed_instances": 4,
+        "frames": 116556,
+        "lag_samples": 577,
+        "late_deltas_applied": 0,
+        "measured_seconds": 592.8717255592346,
+        "processing_seconds_max_frame": 0.007479816675186157,
+        "processing_seconds_total": 10.042757421731949,
+        "resync_reasons": {},
+        "rule_refresh_errors": 0,
+        "rule_refreshes": 6,
+        "stream_lag_max": 1.4112575054168701,
+        "stream_lag_median": 0.04189419746398926,
+        "stream_lag_p95": 0.06133289337158201,
+        "superseded_deltas": 0,
+        "superseded_snapshots": 0,
+        "unknown_seconds": 6.638981580734253,
+        "last_invalid_level_reports": 0
+      },
+      "sol": {
+        "above_3_seconds": 0,
+        "above_3_time_fraction": 0,
+        "disconnects": 0,
+        "events": 89768,
+        "feed_instances": 3,
+        "frames": 90592,
+        "lag_samples": 578,
+        "late_deltas_applied": 0,
+        "measured_seconds": 593.8720035552979,
+        "processing_seconds_max_frame": 0.0036488771438598633,
+        "processing_seconds_total": 7.947212550789118,
+        "resync_reasons": {},
+        "rule_refresh_errors": 0,
+        "rule_refreshes": 5,
+        "stream_lag_max": 0.22279071807861328,
+        "stream_lag_median": 0.041939735412597656,
+        "stream_lag_p95": 0.06375762224197387,
+        "superseded_deltas": 0,
+        "superseded_snapshots": 0,
+        "unknown_seconds": 5.638643026351929,
+        "last_invalid_level_reports": 0
+      }
+    },
+    "cpu": {
+      "logical_cores": 8,
+      "max_percent_one_core": 39.91087665930459,
+      "median_percent_one_core": 14.566702615302347,
+      "samples": 119
+    },
+    "forecasts_by_asset": {
+      "btc": 11,
+      "eth": 15,
+      "sol": 15
+    },
+    "observations_by_asset": {
+      "btc": 41,
+      "eth": 41,
+      "sol": 41
+    },
+    "reservations": 3,
+    "attempts": 3,
+    "fills": 3,
+    "attempt_rejection_reasons": {},
+    "decision_reasons": {
+      "directional:RESERVED": 3,
+      "directional:SKIP:empty_book_no_executable_quote": 48,
+      "directional:SKIP:exact_opening_twap_unavailable": 17,
+      "directional:SKIP:invalid_reservation": 7,
+      "directional:SKIP:no_directional_cost_adjusted_edge": 31,
+      "directional:SKIP:reference_stale": 4,
+      "directional:SKIP:waiting_for_full_stream_books": 13,
+      "paired:SKIP:below_market_minimum": 5,
+      "paired:SKIP:empty_book_no_executable_quote": 48,
+      "paired:SKIP:exact_opening_twap_unavailable": 17,
+      "paired:SKIP:no_paired_cost_advantage": 36,
+      "paired:SKIP:reference_stale": 4,
+      "paired:SKIP:waiting_for_full_stream_books": 13
+    },
+    "realized_losses": {
+      "cumulative": "0",
+      "day": "0"
+    },
+    "day_halts": [],
+    "halted": false,
+    "entries_halted_today": false,
+    "portfolio": {
+      "available": "9937.82656680",
+      "cash": "9937.82656680",
+      "cost_basis_equity": "10000.00000000",
+      "credits": "0",
+      "equity_lower_bound": "9937.82656680",
+      "open_cost": "62.17343320",
+      "reserved": "0",
+      "spent": "62.17343320"
+    },
+    "reference_error": null,
+    "reference_disconnects": 0,
+    "capture_events_verified": 3164,
+    "capture_dropped": 0,
+    "worker_log_exception_count": 0,
+    "source_runtime_hashes_unchanged": 20
+  },
   "persistent_service_installed": false,
   "v3_candidate_baseline": {
     "stream_lag_median_s": {
@@ -23,7 +174,14 @@
       "eth": 13,
       "sol": 12
     },
-    "worker_cpu_core_fraction_in_diagnostic": 1.054
+    "worker_cpu_core_fraction_in_diagnostic": 1.054,
+    "stream_lag_max_s": {
+      "btc": 120.863754034,
+      "eth": 169.7633161545,
+      "sol": 134.8482711315
+    },
+    "stream_lag_p95_s": null,
+    "note": "Previously reported figures reused; protected archives were not accessed. Candidate p95 unavailable."
   },
   "original_studies_preserved": true,
   "live_execution": false,
@@ -31,5 +189,14 @@
   "paid_calls": 0,
   "real_budget_changed": false,
   "edge_validated": false,
-  "stage": "built and synthetically verified; server verification pending"
+  "stage": "server candidate failed reconnect gate; not installed",
+  "source_commit": "b2610e8e91c7d9d9f2da4d4ae78305fa9eaff384",
+  "server_test_count": 81,
+  "synthetic_worker_lifecycle_passed_on_server": true,
+  "installation_blocker": "BTC disconnects 9 exceed the preregistered maximum of 5 over 600 seconds.",
+  "two_minute_installed_health_check": "not run: installation forbidden by failed candidate",
+  "v2_service_active": true,
+  "v2_service_restarts": 0,
+  "next_gate": "Investigate BTC crossed-book resyncs in a new reviewed version; repeat all gates. The 48-hour parallel observation gate has not started.",
+  "protected_states_and_archives_accessed": false
 }
