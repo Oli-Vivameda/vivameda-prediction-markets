@@ -1,0 +1,77 @@
+{
+  "schema": "crypto5m-final60.generic-acceptance.v3",
+  "bundle_sha256": "35483aa13336bad9f3d9c0c1635bfa55b68541e6a45545ff753fab5a9146c91c",
+  "synthetic_tests_passed": 121,
+  "tests_passed_locally": true,
+  "tests_passed_on_server": true,
+  "synthetic_worker_lifecycle_passed": true,
+  "bounded_candidate_run": {
+    "status": "not started: frozen-code stop condition",
+    "requested_seconds": 900,
+    "required_runner_minimum_seconds": 1200,
+    "runner_started": false,
+    "state_created": false,
+    "passed": null
+  },
+  "persistent_service_installed": false,
+  "v1_candidate_baseline": {
+    "final_minute_forecasts": {
+      "btc": 0,
+      "eth": 0,
+      "sol": 0
+    },
+    "empty_executable_book_skips": 180,
+    "twap_reconstruction_median_abs_bps": 0.08641,
+    "twap_reconstruction_max_abs_bps": 0.131357,
+    "independent_boundaries": 9
+  },
+  "original_studies_preserved": true,
+  "live_execution": false,
+  "signer_access": false,
+  "paid_calls": 0,
+  "real_budget_changed": false,
+  "edge_validated": false,
+  "stage": "server preflight failed; candidate not started; not installed",
+  "source_commit": "c29fe1845ed87d38f782d38e9bcd1d2deb0a332f",
+  "server_test_count": 118,
+  "synthetic_worker_lifecycle_passed_on_server": true,
+  "additional_server_preflight": {
+    "passed": false,
+    "synthetic": true,
+    "check": "fresh_empty_up_book_worker_diagnostics",
+    "worker_freshness_checks_passed": true,
+    "market_probability_method": "down_midpoint_complement",
+    "exception_type": "ZeroDivisionError",
+    "exception_message": "division by zero",
+    "source_location": "worker.py:110",
+    "network_calls": 0,
+    "study_state_created": false,
+    "pinned_source_changed": false
+  },
+  "candidate_metrics": {
+    "lag_by_asset": null,
+    "disconnects_by_asset": null,
+    "final_minute_forecasts_by_asset": null,
+    "decision_skip_reasons": null,
+    "market_probability_method_counts": null,
+    "distinct_conditions": {
+      "observations": null,
+      "markets": null,
+      "outcomes": null
+    },
+    "twap_reconstruction": null,
+    "model_vs_market_same_observation": null,
+    "reservations": null,
+    "fills": null,
+    "rejection_reasons": null,
+    "worker_cpu": null,
+    "realized_losses": null,
+    "halts": null
+  },
+  "two_minute_installed_health_check": null,
+  "blocker": "Fresh empty Up book reaches worker diagnostics and raises ZeroDivisionError at worker.py:110. A pinned-code change would be required, so candidate and installation were not attempted.",
+  "v2_service_changed": false,
+  "next_gate": "A new reviewed version must handle zero total Up-book depth in worker diagnostics and cover this sampling path with a regression test. Then repeat source verification, suite/lifecycle and a clean 900-second candidate under a runner limit of at least 1200 seconds.",
+  "parent_bundle_final60_v2": "b2e6f6296306073d17e2d99639fbfaeb208734de382b040583d897bad298378b",
+  "v2_preflight": "failed: empty Up book ZeroDivisionError in worker diagnostics; no candidate run"
+}
