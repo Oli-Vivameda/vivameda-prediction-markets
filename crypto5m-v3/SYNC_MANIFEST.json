@@ -1,0 +1,32 @@
+{
+  "schema": "crypto5m.source-manifest.v3",
+  "canonical_repository": "Oli-Vivameda/vivameda-prediction-markets",
+  "lane": "crypto5m-v3/",
+  "bundle_sha256": "76b4c6e51bd58c74988877d16becdc7e8a4537e87b71dc35a8b70b753d545364",
+  "files": {
+    "common.py": "c97fd11350d68fb06d5053dae74808f7ab01fa0af2d573b91f22fb7aa4923586",
+    "capture.py": "e3e99cb58e8830056bff0ee349afb3fd999278d8676d9c937a64bc37f9243b54",
+    "transport.py": "d260972342b2a4c2f64ff16a4b5991a5dfbad91c5cb12df07429926515888539",
+    "market.py": "6429cd0045ee440a14aa376dabd9d4a49d6c1f1b80a83ed1831aad5425ecc799",
+    "feeds.py": "fc3a2552fe17430aef2c53f7bad5d1c7707418cac49cb78927bcc4c5c698ca57",
+    "reference.py": "a9d9fbf6748ecabd88ce2e7adb5ffb865c4d9536c504849caf274f2b1c2b0ec4",
+    "model.py": "0efb98b1ef1fb7fc6058b4fa6bfcf58905708731c2e8190c2d693d0f650f3704",
+    "strategy.py": "810c28690acedfc47e53bb5399ed22a398e1c194a9e24b24734662451176d3f3",
+    "ledger.py": "1d333fdd28a2e21f46991897a50b6b9df48c09216215eef2af8bdce4bcf330db",
+    "worker.py": "60de72128ceb8d47c06dd4e331a202682d2f4f4307d36092fc311552fee8f45f",
+    "report.py": "dcd11eaba6ab12d3ef7c1e3ad84a12bd7c9a158c9f9b53ace2bdce321d358688",
+    "training.py": "557f9653673b029fb0a756b3068bf5d001885c045d0b9feff71356c22d62ddcd",
+    "release.py": "be6488bacd991dacef524afbc958e93686272ddf4fe2cc7f7f64632e31c0172c",
+    "install.py": "b1e8807436c4cd1929655651f3fbaa1cdf59c3e205529bf95b5520ff088064e1",
+    "test_study.py": "c2efe3877ec12bbc1943eaa43fb852affda674636addceeaafb7f18b94ec4a56",
+    "test_reference.py": "4db99cf06128a5efd0f6ad44d83e49511e51d430ac62bb97686d03618d611409",
+    "test_v3.py": "6639ae32a35704f3e9d6bfc5b7d57f3440d2267cc6054a3278c82133b88dc2b0",
+    "config.json": "aa86418e4c441d5710c6f9109b7c9d0fab52e4b9ca48fffdad3710d5d044f025",
+    "PROTOCOL.md": "7e95fdf26fbb32fc5352d8ce8ef9d09317b35ee4bcea2ae34e80075de3d364a9"
+  },
+  "tests": 71,
+  "source_operation_verified": false,
+  "persistent_service_installed": false,
+  "raw_records_uploaded": false,
+  "live_execution": false
+}

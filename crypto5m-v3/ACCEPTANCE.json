@@ -1,0 +1,26 @@
+{
+  "schema": "crypto5m.generic-acceptance.v3",
+  "bundle_sha256": "76b4c6e51bd58c74988877d16becdc7e8a4537e87b71dc35a8b70b753d545364",
+  "parent_bundle_v2": "50c8771ed72bae39708df45a8a26a83bff5373a9b7aad7055e0e52baefa6f50a",
+  "synthetic_tests_passed": 71,
+  "tests_passed_locally": true,
+  "tests_passed_on_server": null,
+  "synthetic_worker_lifecycle_passed": true,
+  "bounded_candidate_run": null,
+  "persistent_service_installed": false,
+  "v2_baseline_for_comparison": {
+    "book_reconnects_per_120s": {
+      "btc": 14,
+      "eth": 5,
+      "sol": 2
+    },
+    "filled_attempts": 0
+  },
+  "original_studies_preserved": true,
+  "live_execution": false,
+  "signer_access": false,
+  "paid_calls": 0,
+  "real_budget_changed": false,
+  "edge_validated": false,
+  "stage": "built and synthetically verified; server verification pending"
+}
