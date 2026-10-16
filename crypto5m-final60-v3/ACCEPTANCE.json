@@ -1,77 +1,434 @@
 {
   "schema": "crypto5m-final60.generic-acceptance.v3",
+  "source_commit": "5cd756b0f999bf93f417667b397ed5ce7240ead6",
   "bundle_sha256": "35483aa13336bad9f3d9c0c1635bfa55b68541e6a45545ff753fab5a9146c91c",
   "synthetic_tests_passed": 121,
-  "tests_passed_locally": true,
   "tests_passed_on_server": true,
-  "synthetic_worker_lifecycle_passed": true,
+  "synthetic_worker_lifecycle_passed_on_server": true,
+  "empty_up_book_preflight": {
+    "passed": true,
+    "book_imbalance": null,
+    "market_probability_method": "down_midpoint_complement",
+    "network_calls": 0,
+    "study_state_created": false
+  },
   "bounded_candidate_run": {
-    "status": "not started: frozen-code stop condition",
     "requested_seconds": 900,
-    "required_runner_minimum_seconds": 1200,
-    "runner_started": false,
-    "state_created": false,
-    "passed": null
+    "elapsed_seconds": 900.762700073421,
+    "runner_limit_seconds": 1500,
+    "exit_code": 0,
+    "clean_shutdown": true,
+    "runner_timeout": false,
+    "passed": true,
+    "archived": true
+  },
+  "gates": {
+    "bundle": true,
+    "clean_900_second_completion": true,
+    "reference_connected": true,
+    "book_disconnects": true,
+    "lag": true,
+    "forecast_assets": true,
+    "twap_comparisons": true,
+    "ledger_reopens": true,
+    "capture_verified": true,
+    "no_worker_exceptions": true,
+    "cpu_sampled": true,
+    "paper_only": true,
+    "capture_fully_drained": true,
+    "reference_recent_at_shutdown": true,
+    "worker_final_status_after_900_seconds": true,
+    "three_final_minutes_per_asset": true
+  },
+  "candidate_metrics": {
+    "assets": {
+      "btc": {
+        "disconnects": 2,
+        "crossing_episodes": 128,
+        "crossings_resolved": 128,
+        "rule_refreshes": 7,
+        "rule_refresh_errors": 0,
+        "superseded_deltas": 36,
+        "superseded_snapshots": 49,
+        "late_deltas_applied": 0,
+        "frames": 640404,
+        "events": 639722,
+        "processing_seconds_total": 54.12237364053726,
+        "crossing_max_seconds_resolved": 0.002508878707885742,
+        "crossing_max_events": 3,
+        "processing_seconds_max_frame": 0.006749548017978668,
+        "lag_median": 0.04244685173034668,
+        "lag_p95": 0.07547421455383295,
+        "lag_max": 1.7469003200531006,
+        "lag_samples": 857,
+        "measured_seconds": 888.5567650794983,
+        "unknown_seconds": 10.292606115341187,
+        "above_3_seconds_fraction": 0,
+        "resync_reasons": {
+          "ConnectionError": 2
+        },
+        "last_invalid_levels": [],
+        "feed_instances": 4
+      },
+      "eth": {
+        "disconnects": 0,
+        "crossing_episodes": 4,
+        "crossings_resolved": 4,
+        "rule_refreshes": 5,
+        "rule_refresh_errors": 0,
+        "superseded_deltas": 0,
+        "superseded_snapshots": 9,
+        "late_deltas_applied": 0,
+        "frames": 298402,
+        "events": 297721,
+        "processing_seconds_total": 25.093975227326155,
+        "crossing_max_seconds_resolved": 0.00014090538024902344,
+        "crossing_max_events": 1,
+        "processing_seconds_max_frame": 0.004663817584514618,
+        "lag_median": 0.04229378700256348,
+        "lag_p95": 0.06887547969818109,
+        "lag_max": 1.4812569618225098,
+        "lag_samples": 862,
+        "measured_seconds": 893.6388623714447,
+        "unknown_seconds": 5.213902235031128,
+        "above_3_seconds_fraction": 0,
+        "resync_reasons": {},
+        "last_invalid_levels": [],
+        "feed_instances": 4
+      },
+      "sol": {
+        "disconnects": 0,
+        "crossing_episodes": 2,
+        "crossings_resolved": 2,
+        "rule_refreshes": 5,
+        "rule_refresh_errors": 0,
+        "superseded_deltas": 2,
+        "superseded_snapshots": 4,
+        "late_deltas_applied": 0,
+        "frames": 192988,
+        "events": 192308,
+        "processing_seconds_total": 16.880811519920826,
+        "crossing_max_seconds_resolved": 0.00016498565673828125,
+        "crossing_max_events": 1,
+        "processing_seconds_max_frame": 0.003986276686191559,
+        "lag_median": 0.04235529899597168,
+        "lag_p95": 0.06590006351470948,
+        "lag_max": 1.4705591201782227,
+        "lag_samples": 862,
+        "measured_seconds": 893.6368346214294,
+        "unknown_seconds": 5.219327449798584,
+        "above_3_seconds_fraction": 0,
+        "resync_reasons": {},
+        "last_invalid_levels": [],
+        "feed_instances": 4
+      }
+    },
+    "cpu": {
+      "samples": 179,
+      "median": 23.58266221538013,
+      "max": 41.97051301094005,
+      "cores": 8
+    },
+    "final_minute_forecasts_by_asset": {
+      "btc": 25,
+      "eth": 27,
+      "sol": 12
+    },
+    "final_minute_windows_by_asset": {
+      "btc": 3,
+      "eth": 3,
+      "sol": 3
+    },
+    "forecast_windows_by_asset": {
+      "btc": 2,
+      "eth": 2,
+      "sol": 2
+    },
+    "decision_reasons": {
+      "directional:SKIP:waiting_for_full_stream_books": 3,
+      "directional:SKIP:outside_final_minute": 118,
+      "directional:SKIP:reference_stale": 21,
+      "directional:SKIP:no_directional_cost_adjusted_edge": 14,
+      "directional:RESERVED": 4,
+      "directional:SKIP:already_entered_this_window": 46,
+      "directional:SKIP:no_market_quote": 139
+    },
+    "market_probability_method_counts": {
+      "not_recorded": 142,
+      "both_midpoints": 203
+    },
+    "market_probability_methods_by_asset": {
+      "btc": {
+        "not_recorded": 43,
+        "both_midpoints": 72
+      },
+      "eth": {
+        "not_recorded": 42,
+        "both_midpoints": 73
+      },
+      "sol": {
+        "not_recorded": 57,
+        "both_midpoints": 58
+      }
+    },
+    "distinct_conditions": {
+      "observations": 12,
+      "markets": 12,
+      "outcomes": 6
+    },
+    "index_row_counts": {
+      "observations": 345,
+      "markets": 12,
+      "outcomes": 6
+    },
+    "eligible_priced_conditions": 9,
+    "twap_reconstruction": {
+      "comparisons": 18,
+      "unusable": 3,
+      "median_abs_error_bps": 0.08288766434136777,
+      "max_abs_error_bps": 0.18514171294715412,
+      "independent_comparison_boundaries": 9,
+      "unusable_condition_windows": 3,
+      "unusable_reasons": {
+        "no_point_at_averaging_start": 3
+      }
+    },
+    "model_vs_market_same_observation": {
+      "market": {
+        "n": 3,
+        "brier": 0.04984166666666667,
+        "calibration": [
+          {
+            "band": 0,
+            "n": 1,
+            "mean_prediction": 0.03,
+            "observed_up_rate": 0
+          },
+          {
+            "band": 2,
+            "n": 2,
+            "mean_prediction": 0.2725,
+            "observed_up_rate": 0
+          }
+        ]
+      },
+      "baseline": {
+        "n": 3,
+        "brier": 0.0783336986016642,
+        "calibration": [
+          {
+            "band": 0,
+            "n": 1,
+            "mean_prediction": 0.02562640710397779,
+            "observed_up_rate": 0
+          },
+          {
+            "band": 3,
+            "n": 2,
+            "mean_prediction": 0.3422112508290387,
+            "observed_up_rate": 0
+          }
+        ]
+      },
+      "brier_difference_model_minus_market": 0.028492031934997525,
+      "by_asset": {
+        "btc": {
+          "market": {
+            "n": 1,
+            "brier": 0.07022500000000001,
+            "calibration": [
+              {
+                "band": 2,
+                "n": 1,
+                "mean_prediction": 0.265,
+                "observed_up_rate": 0
+              }
+            ]
+          },
+          "baseline": {
+            "n": 1,
+            "brier": 0.12263263666898466,
+            "calibration": [
+              {
+                "band": 3,
+                "n": 1,
+                "mean_prediction": 0.35018942969339417,
+                "observed_up_rate": 0
+              }
+            ]
+          }
+        },
+        "eth": {
+          "market": {
+            "n": 1,
+            "brier": 0.07840000000000001,
+            "calibration": [
+              {
+                "band": 2,
+                "n": 1,
+                "mean_prediction": 0.28,
+                "observed_up_rate": 0
+              }
+            ]
+          },
+          "baseline": {
+            "n": 1,
+            "brier": 0.11171174639494912,
+            "calibration": [
+              {
+                "band": 3,
+                "n": 1,
+                "mean_prediction": 0.3342330719646832,
+                "observed_up_rate": 0
+              }
+            ]
+          }
+        },
+        "sol": {
+          "market": {
+            "n": 1,
+            "brier": 0.0009,
+            "calibration": [
+              {
+                "band": 0,
+                "n": 1,
+                "mean_prediction": 0.03,
+                "observed_up_rate": 0
+              }
+            ]
+          },
+          "baseline": {
+            "n": 1,
+            "brier": 0.0006567127410588032,
+            "calibration": [
+              {
+                "band": 0,
+                "n": 1,
+                "mean_prediction": 0.02562640710397779,
+                "observed_up_rate": 0
+              }
+            ]
+          }
+        }
+      },
+      "by_remaining_band": {
+        "30-58s": {
+          "market": {
+            "n": 3,
+            "brier": 0.04984166666666667,
+            "calibration": [
+              {
+                "band": 0,
+                "n": 1,
+                "mean_prediction": 0.03,
+                "observed_up_rate": 0
+              },
+              {
+                "band": 2,
+                "n": 2,
+                "mean_prediction": 0.2725,
+                "observed_up_rate": 0
+              }
+            ]
+          },
+          "baseline": {
+            "n": 3,
+            "brier": 0.0783336986016642,
+            "calibration": [
+              {
+                "band": 0,
+                "n": 1,
+                "mean_prediction": 0.02562640710397779,
+                "observed_up_rate": 0
+              },
+              {
+                "band": 3,
+                "n": 2,
+                "mean_prediction": 0.3422112508290387,
+                "observed_up_rate": 0
+              }
+            ]
+          }
+        }
+      },
+      "shadow_fat_tail_model": {
+        "n": 3,
+        "brier": 0.10621882275721667,
+        "calibration": [
+          {
+            "band": 0,
+            "n": 1,
+            "mean_prediction": 0.09687397301951939,
+            "observed_up_rate": 0
+          },
+          {
+            "band": 3,
+            "n": 2,
+            "mean_prediction": 0.393198345463638,
+            "observed_up_rate": 0
+          }
+        ]
+      },
+      "note": "Negative difference means the model beat the market-implied probability on identical rows."
+    },
+    "reservations": 4,
+    "paper_fills": 1,
+    "rejection_reasons": {
+      "no_post_delay_liquidity": 3
+    },
+    "ledger_event_counts": {
+      "attempt": 4,
+      "credit": 4,
+      "day": 1,
+      "finish": 4,
+      "genesis": 1,
+      "reserve": 4
+    },
+    "capture_verified_events": 5317,
+    "capture_final_enqueued": 5317,
+    "realized_losses": {
+      "cumulative": "0",
+      "day": "0"
+    },
+    "halts": {
+      "halted": false,
+      "day_halts": []
+    },
+    "virtual_portfolio": {
+      "available": "10004.32866656",
+      "cash": "10004.32866656",
+      "cost_basis_equity": "10004.32866656",
+      "credits": "29.328666",
+      "equity_lower_bound": "10004.32866656",
+      "open_cost": "0",
+      "reserved": "0",
+      "spent": "24.99999944"
+    },
+    "net_settled_paper_pnl": 4.32866656
   },
   "persistent_service_installed": false,
-  "v1_candidate_baseline": {
-    "final_minute_forecasts": {
-      "btc": 0,
-      "eth": 0,
-      "sol": 0
-    },
-    "empty_executable_book_skips": 180,
-    "twap_reconstruction_median_abs_bps": 0.08641,
-    "twap_reconstruction_max_abs_bps": 0.131357,
-    "independent_boundaries": 9
-  },
+  "root_install_command_prepared": true,
+  "two_minute_installed_health_check": null,
+  "all_24_pinned_source_files_unchanged": true,
   "original_studies_preserved": true,
+  "v2_service_changed": false,
+  "v2_active": true,
+  "v2_restarts": 0,
   "live_execution": false,
   "signer_access": false,
   "paid_calls": 0,
   "real_budget_changed": false,
+  "raw_records_uploaded": false,
   "edge_validated": false,
-  "stage": "server preflight failed; candidate not started; not installed",
-  "source_commit": "c29fe1845ed87d38f782d38e9bcd1d2deb0a332f",
-  "server_test_count": 118,
-  "synthetic_worker_lifecycle_passed_on_server": true,
-  "additional_server_preflight": {
-    "passed": false,
-    "synthetic": true,
-    "check": "fresh_empty_up_book_worker_diagnostics",
-    "worker_freshness_checks_passed": true,
-    "market_probability_method": "down_midpoint_complement",
-    "exception_type": "ZeroDivisionError",
-    "exception_message": "division by zero",
-    "source_location": "worker.py:110",
-    "network_calls": 0,
-    "study_state_created": false,
-    "pinned_source_changed": false
-  },
-  "candidate_metrics": {
-    "lag_by_asset": null,
-    "disconnects_by_asset": null,
-    "final_minute_forecasts_by_asset": null,
-    "decision_skip_reasons": null,
-    "market_probability_method_counts": null,
-    "distinct_conditions": {
-      "observations": null,
-      "markets": null,
-      "outcomes": null
-    },
-    "twap_reconstruction": null,
-    "model_vs_market_same_observation": null,
-    "reservations": null,
-    "fills": null,
-    "rejection_reasons": null,
-    "worker_cpu": null,
-    "realized_losses": null,
-    "halts": null
-  },
-  "two_minute_installed_health_check": null,
-  "blocker": "Fresh empty Up book reaches worker diagnostics and raises ZeroDivisionError at worker.py:110. A pinned-code change would be required, so candidate and installation were not attempted.",
-  "v2_service_changed": false,
-  "next_gate": "A new reviewed version must handle zero total Up-book depth in worker diagnostics and cover this sampling path with a regression test. Then repeat source verification, suite/lifecycle and a clean 900-second candidate under a runner limit of at least 1200 seconds.",
-  "parent_bundle_final60_v2": "b2e6f6296306073d17e2d99639fbfaeb208734de382b040583d897bad298378b",
-  "v2_preflight": "failed: empty Up book ZeroDivisionError in worker diagnostics; no candidate run"
+  "open_issues": [
+    "RUNBOOK candidate example says 600 seconds; HANDOVER authority and owner request were followed with 900 seconds.",
+    "Inherited report unique_markets_with_price is 18 because its variable is overwritten by reconstruction errors. Direct query gives 9 eligible priced conditions; index tables have 12/12/6 distinct conditions. No pinned file was edited.",
+    "Three initial reconstruction windows lacked a point at averaging start.",
+    "All naturally recorded probability methods were both_midpoints; fallback paths passed synthetic tests and the independent empty-Up preflight but were not observed prospectively.",
+    "Three final-minute windows were observed per asset; forecasts occurred in two per asset. There were 139 no_market_quote skips.",
+    "Only three matched settled observations; early operational evidence does not validate an edge.",
+    "Public legacy Chainlink reference adapter remains a retiring dependency."
+  ],
+  "stage": "candidate passed; root installation and independent two-minute health check pending",
+  "next_gate": "Owner root installation to a new state and independent two-minute health check; then first 100 TWAP comparisons (median absolute error <=1 bp) before profit claims, followed by this lane's own 7/3/4/28-day chronology. Preserve every installed service and archive."
 }
