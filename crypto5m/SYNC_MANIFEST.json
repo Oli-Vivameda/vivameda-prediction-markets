@@ -22,7 +22,7 @@
   },
   "tests": 43,
   "source_operation_verified": true,
-  "persistent_service_installed": false,
+  "persistent_service_installed": true,
   "raw_records_uploaded": false,
   "live_execution": false
 }

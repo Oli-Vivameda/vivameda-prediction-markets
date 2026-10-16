@@ -24,12 +24,26 @@
   "historical_controls_ingested": false,
   "prospective_outcomes": 0,
   "paper_positions": 0,
-  "persistent_service_installed": false,
+  "persistent_service_installed": true,
   "live_execution": false,
   "signer_access": false,
   "real_budget_changed": false,
   "existing_units_changed": false,
   "reference_adapter_connected": false,
   "edge_validated": false,
-  "stage": "collecting data—no validated edge"
+  "stage": "collecting data—no validated edge",
+  "post_install_verification": {
+    "verified_at_utc": "2026-10-16T13:49:32Z",
+    "service_active": true,
+    "service_enabled": true,
+    "restarts": 0,
+    "runtime_source_hashes_match": true,
+    "capture_verified_events": 438,
+    "ledger_integrity_verified": true,
+    "observations": 27,
+    "official_outcomes": 3,
+    "paper_positions": 0,
+    "book_data_quality": "degraded: BTC/ETH discovery gaps and SOL reconnects; invalid books rejected",
+    "real_owner_stop_retained": true
+  }
 }
