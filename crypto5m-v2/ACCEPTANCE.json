@@ -1,0 +1,53 @@
+{
+  "schema": "crypto5m.generic-acceptance.v2",
+  "bundle_sha256": "50c8771ed72bae39708df45a8a26a83bff5373a9b7aad7055e0e52baefa6f50a",
+  "synthetic_tests_passed": 54,
+  "tests_passed_locally": true,
+  "tests_passed_on_server": true,
+  "synthetic_worker_lifecycle_passed": true,
+  "unit_validated": true,
+  "bounded_collection_seconds": 120,
+  "markets": 6,
+  "observations": 27,
+  "operational_forecasts": 10,
+  "forecasts_by_asset": {
+    "btc": 2,
+    "eth": 4,
+    "sol": 4
+  },
+  "capture_verified_events": 494,
+  "reference_responses": 666,
+  "reference_disconnects": 0,
+  "stale_reference_snapshots_rejected": 6,
+  "directional_reservations": 3,
+  "filled_attempts": 0,
+  "attempt_reasons": [
+    "waiting_for_full_stream_books",
+    "missed_execution_window",
+    "no_post_delay_liquidity"
+  ],
+  "book_reconnects": {
+    "btc": 14,
+    "eth": 5,
+    "sol": 2
+  },
+  "reference_feed_retiring": true,
+  "reference_sequence_available": false,
+  "persistent_service_installed": false,
+  "original_study_preserved": true,
+  "real_owner_stop_retained": true,
+  "live_execution": false,
+  "signer_access": false,
+  "paid_calls": 0,
+  "real_budget_changed": false,
+  "edge_validated": false,
+  "stage": "paper inputs and execution attempts verified; no prospective fill yet",
+  "candidate_seven_minute_run": {
+    "bundle": "eb9a445cebe9d2982d8f4ad912ff54be3edf3634fd8fb1c5c9ac75bb891b3189",
+    "source_and_capture_preserved_separately": true,
+    "observations": 87,
+    "attempts": 2,
+    "filled_attempts": 0,
+    "official_outcomes": 2
+  }
+}
