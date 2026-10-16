@@ -1,0 +1,21 @@
+# BTC ETH SOL five-minute paper study v5
+
+Version 5 keeps v4 unchanged except for one rule: a briefly crossed reconstructed book is tolerated for up to 2 seconds (never tradeable) and resynchronized only if it persists, with crossing evidence recorded. Repeat decisions in an already-entered window get a clear label. The v4 description follows.
+
+
+Version 4 of the isolated paper study. v4 fixes the processing bottleneck that failed the v3 server candidate: book deltas are now applied in place (about 34x faster), tick and minimum size are refreshed from REST on every stream connection, and invalid levels are recorded in detail. v3 is otherwise carried forward. The v3 description follows.
+
+v3 kept v2's public Chainlink reference adapter, model, strategies, costs, caps and settlement rules, and changed four operational things:
+
+- the book stream no longer reconnects on late or superseded messages
+- connection liveness keeps quiet books usable
+- the halt uses realized losses (daily reset, cumulative hard stop)
+- pending delayed fills get priority over slow network housekeeping
+
+It also adds a same-observation model-versus-market score and an offline training-row builder. This is a new source-pinned experiment, separate from v3, v2 and v1.1; do not mix their results. No account credentials, signer or financial API calls.
+
+Risk policy: 10,000 virtual cash; 25 per directional or paired attempt; shared 75 per market window; daily worst-case exposure bound 100; daily realized-loss halt 100 (resumes next UTC day); cumulative realized-loss stop 500 (permanent). No Kelly, passive fills or automatic promotion.
+
+Run synthetic validation with `python3 -B -m unittest -q test_study test_reference test_v3 test_v4 test_v5` and `python3 -B verify_lifecycle.py`. See PROTOCOL.md, RUNBOOK.md and HANDOVER.md. The installer creates only vivameda-crypto5m-study-v5.service, runtime /opt/vivameda-crypto5m-study-v5 and its own external-volume state. The v4 and v3 candidate archives, v2 and v1.1 are preserved.
+
+This is paper research, not a validated trading strategy. The public reference endpoint is retiring. Missing, stale, revised or incomplete data causes abstention, not replacement prices.
