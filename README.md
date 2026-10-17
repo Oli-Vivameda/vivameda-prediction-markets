@@ -1,63 +1,79 @@
 # Vivameda prediction markets
 
-Two research lanes share this repository. Installed services keep real-money execution disabled. Optional live-pilot source requires separate owner operation.
+Research on short-horizon Polymarket crypto markets (BTC, ETH and SOL Up/Down, 5 and 15 minutes) and on company-linked prediction contracts. Every study is preregistered, pinned by hash, run on paper, and published with its failures.
 
-| Lane | Code | Purpose |
+Installed services trade on paper only. No result in this repository is a claim of a profitable edge.
+
+## Running now
+
+Status as of 17 October 2026.
+
+| Lane | What it tests | Status |
 |---|---|---|
-| Company-linked contracts | Repository root | Discover public contracts, retain exact rules, attach bounded company evidence and track reviewed paper forecasts |
-| BTC five-minute outcomes | [btc5m/](btc5m/README.md) | Capture public ticks/books, freeze paper entries, monitor health and test chronological numeric challengers |
+| [Final-minute partial TWAP v3](crypto5m-final60-v3/) | Inside the last 60 seconds part of the settlement TWAP is already fixed. Does the market underprice that? | Candidate passed 16 Oct. Installed. Collecting the first 100 reconstruction checks. |
+| [crypto5m v5](crypto5m-v5/) | Baseline forecast over the whole 5-minute window, BTC, ETH and SOL | Candidate passed 16 Oct. Installed. 48-hour review against v2. |
+| [crypto5m v2](crypto5m-v2/) | Earlier baseline | Running until the v5 review decides its retirement. |
+| [BTC five-minute lab](btc5m/) | BTC paper lab with numeric challengers | Preregistered study 14 to 28 October. |
+| Company-contract scanner (repository root) | Polymarket and Kalshi contracts linked to companies | Running, hourly notifications. |
 
-## Company-contract scanner
+## What we have learned so far
 
-Public GET adapters discover ordinary binary Polymarket and Kalshi contracts in rotating bounded pages. A starter company alias registry routes questions for retained evidence. Exact-token crypto evidence is separate; generic chain-price questions abstain. BTC/ETH coverage is withheld by this scanner; the separate BTC lane handles five-minute contracts.
+**Engineering.** The v3 candidate ran 30 to 43 seconds behind the market. An independent probe on the same server read the venue feed within about 40 milliseconds, which proved the lag was ours: the worker rebuilt and re-hashed the full order book on every update and saturated one CPU core. v4 updates books in place (about 690 down to about 20 microseconds per event in a local benchmark), and live lag fell to about 0.04 seconds. v5 then tolerated the brief crossed books BTC produces during matching: 64 crossings in the candidate run, all resolved within 16 milliseconds, none persistent.
 
-Candidates retain question, rule text, source fingerprint, deadline and observation time. Relevance is a heuristic and never becomes a probability. Descriptive company context alone does not establish identity, resolution answerability or an investment edge.
+**The final-minute premise holds so far.** Our reconstruction of Chainlink's 60-second settlement TWAP matched the official value with a median error of 0.08 basis points (maximum 0.19) across 9 independent window boundaries, against a preregistered limit of 1 basis point. The formal check runs at 100 comparisons.
 
-Reviewed researcher forecasts are immutable and labelled unvalidated. Paper entries require a fresh quote, observed depth, reviewed fees/slippage and positive conservative expected payout minus all-in price. Paper fills are assumptions, not real executions; settlement requires explicit reviewed final payout.
+**Forecast quality: too early to say.** On the first 3 matched settled observations the model scored worse than the market-implied probability (Brier 0.078 against 0.050). That is a sample of 3; it decides nothing yet.
 
-The scanner supports grouped hourly notifications, direct contract links, duplicate suppression and bounded message counts. Destination configuration and credentials stay private. Adding the BTC lane does not change scanner behavior or activate any new notification channel.
+**Fills are the hard part.** With a 2-second simulated delay, 3 of 4 final-minute paper entries found the liquidity already gone. If this persists, the edge (if any) belongs to faster traders, and that is a result worth publishing either way.
 
-## BTC five-minute paper lab
+Failed candidates are kept, not deleted: crypto5m v3 (lag) and v4 (BTC disconnects) at the archive tag [`archive/crypto5m-candidates-20261016`](https://github.com/Oli-Vivameda/vivameda-prediction-markets/tree/archive/crypto5m-candidates-20261016), [final-minute v1](crypto5m-final60-v1/) (no forecasts: one-sided books in the last minute) and [v2](crypto5m-final60-v2/) (a crash found in preflight).
 
-The [BTC lab](btc5m/README.md) uses an uncalibrated volatility/TWAP baseline, immutable trade plans and separate 250 ms/2 s shadow execution arms. It records public reference ticks and book events, pauses entries on unhealthy data and produces private daily reports. The running paper lab has no execution adapter enabled. A separate [owner-operated $10 pilot](btc5m/live_pilot/README.md) adds optional execution software; it is unconfigured and blocked pending account and eligibility checks.
+## How a lane works
 
-The preregistered study runs 14–28 October 2026 UTC, with independent training, calibration and held-out testing. Two numeric challengers are evaluated against baseline, market and momentum. Count/coverage gates, prediction hashes, realistic depth limitations and no automatic promotion are documented in [the protocol](btc5m/OPS_PROTOCOL.md).
-
-Validation as of 13 October: 74 functional checks and a disposable synthetic challenger pipeline pass. Controlled recovery preserves the journal. Dedicated paper supervision and the daily training-gate timer are active and enabled; the next check is 14 October at 08:05 Asia/Nicosia. First full healthy-day verification, real-data model evaluation and any live execution approval remain pending. No profitable edge is claimed.
-
-## Development
-
-The company scanner's standalone discovery and synthetic tests work without proprietary datasets; the evidence bridge requires separately installed private modules. Run the existing scanner tests from the repository root:
-
-```bash
-python3 -m unittest -v test_scanner test_ledger test_notify test_install test_configure_telegram
+```mermaid
+flowchart LR
+  A[Polymarket order books<br/>public WebSocket] --> W[Worker<br/>freshness guards, model]
+  B[Chainlink reference<br/>public stream] --> W
+  W --> L[Paper ledger<br/>append-only, hash-chained]
+  L --> F[Delayed paper fill<br/>fresh REST book]
+  O[Official CLOB outcome] --> L
+  L --> R[Reports: Brier vs market,<br/>fills, costs, drawdown]
 ```
 
-Run the isolated BTC tests separately to avoid module-name collisions:
+## How studies are run
+
+- The protocol, model and pass/fail gates are committed before any data is collected.
+- Each version is isolated with its own ledger. A change means a new version; nothing is edited in place. Archived versions live under Git tags; future versions use branches or tags rather than copied folders.
+- The installed source is pinned by a bundle hash; the installer refuses anything that does not match.
+- A bounded candidate run must pass preregistered gates (latency, disconnects, data integrity) before installation. Failures are archived with the reason.
+- Final-period scores are withheld until the evaluation window closes.
+- Paper only. Real execution, keys and signing are outside every installed service.
+
+What is published and what is not: [publication policy](PUBLICATION_POLICY.md).
+
+## Verify
+
+Each lane runs its own tests in isolation, for example:
 
 ```bash
-cd btc5m
-python3 -m unittest discover -s . -q
+cd crypto5m-final60-v3
+python3 -B -m unittest -q test_study test_reference test_v3 test_v4 test_v5 test_final60 test_final60_v2 test_final60_v3
+python3 -B verify_lifecycle.py
+python3 -B install.py   # prints the bundle hash; compare with SYNC_MANIFEST.json
 ```
 
-See [the BTC setup guide](btc5m/README.md), [build status](btc5m/BUILD_STATUS.md), [source hashes](btc5m/SOURCE_MANIFEST.json) and [handover index](HANDOVER_INDEX.md). Existing scanner releases and handovers retain their original provenance.
+## Repository layout
 
-## Data and execution boundaries
+| Path | Contents |
+|---|---|
+| `crypto5m-final60-v*/` | Final-minute partial-TWAP lane, one folder per version |
+| `crypto5m-v2/`, `crypto5m-v5/`, `crypto5m/` | Five-minute baseline study (v1.1, v2, v5); v3 and v4 are archived under a tag |
+| `btc5m/` | BTC five-minute lab and its protocol |
+| repository root | Company-contract scanner, notifications and tests |
+| `docs/history/` | Earlier README and dated records |
 
-This public repository contains reviewed source, tests, protocols and sanitized validation. It excludes credentials, account observations, raw captures, proprietary datasets, private evidence, forecast journals and learned model binaries. Runtime configuration and deployment paths are supplied privately.
+Each version folder carries PROTOCOL.md, HANDOVER.md, BUILD_STATUS.md, ACCEPTANCE.json and SYNC_MANIFEST.json.
 
-Cloning or updating this repository does not deploy services, train a real-data model or place orders. Missing evidence, unknown costs, incomplete identity and unavailable liquidity are explicit limitations. Real trading requires a separate reviewed execution design and authorization.
+## History
 
-
-## BTC / ETH / SOL five-minute research
-
-The isolated [multi-asset study](crypto5m/README.md) extends the BTC collector with versioned rules, shared fixed-stake paper risk, sequential paired-leg simulation, chronological model interfaces and reporting. [Acceptance](crypto5m/ACCEPTANCE.json): 43 checks and bounded public collection verified. Stage is **collecting data—no validated edge**; required contractual reference inputs are unavailable, so both strategies abstain. [Runbook](crypto5m/RUNBOOK.md). Existing scanner and BTC lanes are preserved.
-
-
-## Public-reference paper extension (v2)
-
-[Version 2](crypto5m-v2/README.md) adds public legacy Chainlink raw/TWAP snapshots and empty-book recovery in a separate study. No credentials or live execution. The legacy endpoint is retiring; stale/incomplete inputs still cause abstention. See [build status](crypto5m-v2/BUILD_STATUS.md) for current operational verification and installation status.
-
-## Candidate archive policy — 16 October 2026
-
-The failed `crypto5m-v3/` and `crypto5m-v4/` candidates are retained at archive tag `archive/crypto5m-candidates-20261016`. Publish and verify that tag before merging this cleanup into main. Their removal affects repository organization only. Preserve `crypto5m/` (v1.1), `crypto5m-v2/` and `crypto5m-v5/`; no installed service or runtime state changes. Future versions use Git branches or tags, not copied folders. Other pre-existing lanes are outside this cleanup.
+The previous README, describing the company scanner and BTC lab in detail: [docs/history/README_THROUGH_20261017.md](docs/history/README_THROUGH_20261017.md).
